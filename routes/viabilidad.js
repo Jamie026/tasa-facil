@@ -6,7 +6,6 @@ const fs = require('fs').promises;
 const nodemailer = require('nodemailer');
 const handlebars = require('handlebars');
 const express = require('express');
-const { log } = require('console');
 const viabilidad = express.Router();
 
 function formatearDato(data) {
@@ -39,7 +38,13 @@ async function enviarEmail(evaluacionData, email, admin, usuarioData) {
         const output = template({ data: arraysDeObjetos });
 
         const pdfPromise = new Promise((resolve, reject) => {
-            PDF.create(output).toFile((error, response) => error? reject(error) : resolve(response));
+            PDF.create(output, {
+                childProcessOptions: {
+                    env: {
+                        OPENSSL_CONF: '/dev/null',
+                    }
+                }
+            }).toFile((error, response) => error? reject(error) : resolve(response));
         });
 
         const pdfResponse = await pdfPromise;
