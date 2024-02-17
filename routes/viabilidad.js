@@ -6,6 +6,7 @@ const fs = require('fs').promises;
 const nodemailer = require('nodemailer');
 const handlebars = require('handlebars');
 const express = require('express');
+const { log } = require('console');
 const viabilidad = express.Router();
 
 function formatearDato(data) {
@@ -85,7 +86,7 @@ viabilidad.post('/', async (request, response) => {
         const tasaCambio = await axios.get("https://api.apis.net.pe/v1/tipo-cambio-sunat");
         const adminResponse = await axios.get('https://4dbvkk2b12.execute-api.us-east-1.amazonaws.com/dev/tasafacil/listar_parametros');
         const evaluacionResponse = await axios.post("https://4dbvkk2b12.execute-api.us-east-1.amazonaws.com/dev/tasafacil/evaluar_inmueble", {
-            "correo": data.email, "nombre": data.distrito,
+            "correo": data.email, "nombre": data.distrito.replace(/\b\w/g, char => char.toUpperCase()).replace(/\s+/g, '_'),
             "direccion": data.direccion, "segmento": data.segmento,
             "area": parseInt(data.area), "altura_max": parseInt(data.altura),
             "precio_m2_dol": parseInt(data.precio_m2), "posicion": data.posicion,
