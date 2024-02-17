@@ -81,7 +81,6 @@ function whatsappLink(elementLink) {
 
 window.onload = async () => {
     validarFormularios();
-    inputRangeAltura();
     inputFormRanges();
     whatsappLink(document.getElementById('contactar'));
     
