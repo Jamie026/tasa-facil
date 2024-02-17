@@ -1,0 +1,135 @@
+/*Background*/
+body{
+    background: url("./../img/fondo-inmobiliario.png") center no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+/*Navbar*/
+.nav-link{
+    width: fit-content;
+    transition: all 300ms;
+    font-size: 20px;
+    border-bottom: black 2px solid;
+}
+
+.nav-link:hover{
+    transform: scale(1.1);
+}
+
+/*Parallax*/
+.parallax-container{
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.parallax-multimedia{
+    width: 100%;
+    object-fit: fill;
+    height: 100%;
+}
+
+/*Mapa*/
+#mapa{
+    height: 100%;
+    width: 100%;
+    padding: 20px;
+    z-index: 0;
+}
+
+/*Posicionamiento*/
+.item-center{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+/*Titulo*/
+.title{
+    color: #F3F3F3;
+    text-transform: uppercase;
+    font-style: italic;
+    font-family: verdana;
+    font-size: 80px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.subtitle{
+    color: #F3F3F3;
+    font-style: italic;
+    font-family: verdana;
+    font-size: 40px;
+    text-align: center;
+    font-weight: 700;
+}
+
+/*Tablas*/
+.table-data{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-data th{
+    height: 20px;
+    font-size: 20px;
+    font-family: monospace;
+    text-align: center;
+    background-color: #0d6efd;
+    color: white;
+    padding: 5px;
+}
+
+.table-data td{
+    height: 50px;
+    padding: 15px;
+    text-align: center;
+}
+
+/*Alertas*/
+.alert{
+    width: fit-content;
+    position: fixed;
+    bottom: 5%;
+    right: 5%;
+    z-index: 100;
+}
+
+/*Footer*/
+.footer{
+    background-color: #F3F3F3;
+}
+
+/*Media Queries*/
+@media (max-width: 991px) {
+    .nav-link{
+        font-size: 18px;
+        border: none;
+    }
+}
+
+@media (max-width: 991px), (max-height: 700px) {
+    .title{
+        font-size: 40px;
+    }
+
+    .subtitle{
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    #mapa{
+        height: 300px;
+    }
+}

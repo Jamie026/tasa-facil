@@ -1,0 +1,10 @@
+{{#each data}}
+    {{#if @key}}
+        <h2>{{@key}}</h2>
+        <ul>
+        {{#each this}}
+            <li>{{clave}}: {{valor}}</li>
+        {{/each}}
+        </ul>
+    {{/if}}
+{{/each}}
