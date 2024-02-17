@@ -14,7 +14,7 @@ app.engine('hbs', handlebars.engine({
     defaultLayout: 'index',
     layoutsDir: __dirname + '/views/layouts', 
     extname: 'hbs',
-    partialsDir: __dirname + '/views/partials/' 
+    partialsDir: __dirname + '/views/partials/'
 }));
 
 app.use(express.static(path.join(__dirname, 'public')));
