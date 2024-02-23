@@ -14,4 +14,8 @@ router.get('/', async (request, response) => {
     }
 });
 
+router.get('/contacto', async (request, response) => {
+    response.render('contacto', { layout: 'index' });
+});
+
 module.exports = router;
