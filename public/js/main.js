@@ -82,7 +82,6 @@ function whatsappLink(elementLink) {
 window.onload = async () => {
     validarFormularios();
     inputFormRanges();
-    whatsappLink(document.getElementById('contactar'));
     
     const botonUbicar = document.getElementById('ubicar');
     botonUbicar && await inicializarMapa(clickUbicar);
