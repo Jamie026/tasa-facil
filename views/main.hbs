@@ -7,12 +7,12 @@
         <video class="parallax-multimedia" src="./img/presentacion.mp4" autoplay muted loop></video>
         <div class="item-center">
             <p class="title animate__animated animate__backInUp">Bienvenido a Tasa Fácil</p>
-            <a class="btn btn-light rounded rounded-4 fs-5 px-2" href="#card-form">
+            <a class="btn btn-light rounded rounded-4 fs-5 px-3 my-3" href="#card-form">
                 Calcula el precio de tu inmueble aquí
             </a>
         </div>
     </section>
-    <section class="container-fluid my-5 px-3 position-relative" id="card-form">
+    <section class="container my-5" id="card-form">
         <div class="row justify-content-center align-items-center">
             <div class="col-12">
                 <div class="card mt-4 border border-3 border-dark rounded">
@@ -22,10 +22,10 @@
                         </div>
                         <div class="col-sm-12 col-md-6">
                             <div class="card-body px-5">
-                                <h5 class="card-title text-center my-2">Evaluación de Viabilidad</h5>
-                                <h6 class="card-subtitle my-3 text-body-secondary text-center">Ingrese todos los datos
+                                <h5 class="card-title text-center my-2 w-100">Evaluación de Viabilidad</h5>
+                                <h6 class="card-subtitle my-4 text-body-secondary text-center w-100">Ingrese todos los datos
                                     solicitados</h6>
-                                <form class="row px-0 g-3 needs-validation" method="POST" action="./viabilidad" novalidate id="formViabilidad">
+                                <form class="row form px-0 g-3 needs-validation" method="POST" action="./viabilidad" novalidate id="formViabilidad">
                                     <input type="hidden" name="segmento" id="segmento" value="0">
                                     <div class="col-sm-12 col-md-6 mb-4">
                                         <input type="email" class="form-control" name="email" id="email"
@@ -56,7 +56,7 @@
                                         <button class="btn btn-secondary w-100" type="button" id="ubicar">Registrar ubicación</button>
                                     </div>
                                     <div class="col-12 mb-4">
-                                        <input type="text" class="form-control" name="ubicacion" id="ubicacionInput" placeholder="Ubicación Registrada (haga click en el botón)"
+                                        <input type="text" class="form-control" name="ubicacion" id="ubicacionInput" placeholder="Ubicación Registrada"
                                             onkeydown="event.preventDefault()" autocomplete="off" required>
                                         <div id="validationUbicacion" class="invalid-feedback">
                                             Debe registrar la ubicación
@@ -75,23 +75,24 @@
                                         </div>
                                     </div>
                                     <div class="col-12 mb-2">
-                                        <label for="area" class="form-label my-3">Area (metros cuadrados): <output
-                                                id="areaValue">{{adminData.area_minima}}</output></label>
-                                        <input type="range" value="{{adminData.area_minima}}" class="form-range" name="area" min="{{adminData.area_minima}}"
+                                        <input type="number" placeholder="Area (metros cuadrados)" class="form-control inputNumber" name="area" min="{{adminData.area_minima}}"
+                                            max="{{adminData.area_maxima}}" id="area">
+                                        <input type="range" class="form-range inputRange" name="area" min="{{adminData.area_minima}}"
                                             max="{{adminData.area_maxima}}" id="area">
                                     </div>
                                     <div class="col-12 mb-2">
-                                        <label for="altura" class="form-label my-3">Altura máxima (pisos): <output
-                                                id="alturaValue">{{adminData.altura_minima_estandar}}</output></label>
-                                        <input type="range" value="{{adminData.altura_minima_estandar}}" class="form-range" name="altura" min="{{adminData.altura_minima_estandar}}"
+                                        <input type="number" placeholder="Altura máxima (pisos)" class="form-control inputNumber" name="altura" min="{{adminData.altura_minima_estandar}}"
+                                            max="{{adminData.altura_maxima_estandar}}" id="altura">
+                                        <input type="range" class="form-range inputRange" name="altura" min="{{adminData.altura_minima_estandar}}"
                                             max="{{adminData.altura_maxima_estandar}}" id="altura">
                                     </div>
                                     <div class="col-12 mb-2">
-                                        <label for="precio" class="form-label my-3">Precio por metro cuadrado: $<output
-                                                id="precioValue">{{adminData.precio_m2_usd_terreno_cliente_minimo}}</output></label>
-                                        <input type="range" value="{{adminData.precio_m2_usd_terreno_cliente_minimo}}" name="precio_m2" class="form-range"
+                                        <input type="number" placeholder="Precio por metro cuadrado en $" name="precio_m2" class="form-control inputNumber"
+                                            min="{{adminData.precio_m2_usd_terreno_cliente_minimo}}" max="{{adminData.precio_m2_usd_terreno_cliente_maximo}}" id="precio">
+                                        <input type="range" name="precio_m2" class="form-range inputRange"
                                             min="{{adminData.precio_m2_usd_terreno_cliente_minimo}}" max="{{adminData.precio_m2_usd_terreno_cliente_maximo}}" id="precio">
                                     </div>
+
                                     <div class="col-12">
                                         <div class="form-check">
                                             <label class="form-check-label">

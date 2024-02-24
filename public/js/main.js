@@ -41,20 +41,24 @@ function clickUbicar() {
 }
 
 function inputFormRanges() {
-    document.querySelectorAll('.form-range').forEach(range => {
-        range.addEventListener('input', (e) => document.getElementById(e.target.id + 'Value').textContent = e.target.value);
+    let ranges = document.querySelectorAll('.inputRange');
+    console.log(ranges);
+    Array.from(ranges).forEach(range => {
+        console.log(range);
+        let field = range.previousElementSibling;
+        console.log(field);
+        range.addEventListener('input', (e) => field.value = e.target.value);
+        field.addEventListener('input', (e) => range.value = e.target.value);
     });
 }
 
 function validarFormularios() {
-    'use strict';
     const forms = document.querySelectorAll('.needs-validation');
-
     Array.from(forms).forEach(form => {
-        form.addEventListener('submit', event => {
+        form.addEventListener('submit', e => {
             if(!form.checkValidity()) {
-                event.preventDefault();
-                event.stopPropagation();
+                e.preventDefault();
+                e.stopPropagation();
             }
             form.classList.add('was-validated');
         }, false);
@@ -82,7 +86,6 @@ function whatsappLink(elementLink) {
 window.onload = async () => {
     validarFormularios();
     inputFormRanges();
-    
     const botonUbicar = document.getElementById('ubicar');
     botonUbicar && await inicializarMapa(clickUbicar);
 

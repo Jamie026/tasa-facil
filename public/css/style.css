@@ -113,9 +113,9 @@ body{
     z-index: 100;
 }
 
-/*Footer*/
-.footer{
-    background-color: #F3F3F3;
+/*Formulario*/
+.form *{
+    font-size: 14px;
 }
 
 /*Media Queries*/
