@@ -75,24 +75,32 @@
                                         </div>
                                     </div>
                                     <div class="col-12 mb-2">
-                                        <input type="number" placeholder="Area (metros cuadrados)" class="form-control inputNumber" name="area" min="{{adminData.area_minima}}"
-                                            max="{{adminData.area_maxima}}" id="area">
+                                        <input type="number" placeholder="Área (metros cuadrados)" class="form-control inputNumber" name="area" min="{{adminData.area_minima}}"
+                                            max="{{adminData.area_maxima}}" id="area" required>
                                         <input type="range" class="form-range inputRange" name="area" min="{{adminData.area_minima}}"
                                             max="{{adminData.area_maxima}}" id="area">
+                                        <div id="validationArea" class="invalid-feedback">
+                                            Debe indicar el área
+                                        </div>
                                     </div>
                                     <div class="col-12 mb-2">
                                         <input type="number" placeholder="Altura máxima (pisos)" class="form-control inputNumber" name="altura" min="{{adminData.altura_minima_estandar}}"
-                                            max="{{adminData.altura_maxima_estandar}}" id="altura">
+                                            max="{{adminData.altura_maxima_estandar}}" id="altura" required>
                                         <input type="range" class="form-range inputRange" name="altura" min="{{adminData.altura_minima_estandar}}"
                                             max="{{adminData.altura_maxima_estandar}}" id="altura">
+                                        <div id="validationAltura" class="invalid-feedback">
+                                            Debe indicar la altura
+                                        </div>
                                     </div>
                                     <div class="col-12 mb-2">
                                         <input type="number" placeholder="Precio por metro cuadrado en $" name="precio_m2" class="form-control inputNumber"
-                                            min="{{adminData.precio_m2_usd_terreno_cliente_minimo}}" max="{{adminData.precio_m2_usd_terreno_cliente_maximo}}" id="precio">
+                                            min="{{adminData.precio_m2_usd_terreno_cliente_minimo}}" max="{{adminData.precio_m2_usd_terreno_cliente_maximo}}" id="precio" required>
                                         <input type="range" name="precio_m2" class="form-range inputRange"
                                             min="{{adminData.precio_m2_usd_terreno_cliente_minimo}}" max="{{adminData.precio_m2_usd_terreno_cliente_maximo}}" id="precio">
+                                        <div id="validationPrecio" class="invalid-feedback">
+                                            Debe indicar el precio
+                                        </div>
                                     </div>
-
                                     <div class="col-12">
                                         <div class="form-check">
                                             <label class="form-check-label">
