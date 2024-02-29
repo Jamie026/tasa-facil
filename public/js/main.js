@@ -8,7 +8,7 @@ async function actualizarUbicacion(distrito, direccion) {
         const coordenada = await ubicacion.obtenerCoordenada(direccionCompleta);
         const distritoFormateado = distrito.replace(/\b\w/g, char => char.toUpperCase()).replace(/\s+/g, '_');
         const segmentos = await ubicacion.obtenerSegmentos(distritoFormateado);
-        const segmentosFormateados = Object.values(segmentos).map(segmento => segmento.S);
+        const segmentosFormateados = Object.values(segmentos).map(segmento => segmento.M.coordenada.S);
 
         let numSegmento = 0;
         let encontrado = false;
@@ -42,11 +42,8 @@ function clickUbicar() {
 
 function inputFormRanges() {
     let ranges = document.querySelectorAll('.inputRange');
-    console.log(ranges);
     Array.from(ranges).forEach(range => {
-        console.log(range);
         let field = range.previousElementSibling;
-        console.log(field);
         range.addEventListener('input', (e) => field.value = e.target.value);
         field.addEventListener('input', (e) => range.value = e.target.value);
     });
