@@ -72,16 +72,6 @@ body{
     z-index: 1;
 }
 
-/*Titulo*/
-.title{
-    color: #F3F3F3;
-    text-transform: uppercase;
-    font-style: italic;
-    font-size: 80px;
-    text-align: center;
-    font-weight: 700;
-}
-
 /*Tablas*/
 .table-data{
     width: 100%;
@@ -116,13 +106,6 @@ body{
 /*Formulario*/
 .form *{
     font-size: 14px;
-}
-
-/*Media Queries*/
-@media (max-width: 991px), (max-height: 700px) {
-    .title{
-        font-size: 40px;
-    }
 }
 
 @media (max-width: 768px) {
