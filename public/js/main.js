@@ -5,7 +5,7 @@ async function actualizarUbicacion(distrito, direccion) {
     const direccionCompleta = distrito + ' ' + direccion;
     try {
         alertify.notify('Actualizando ubicación...', 'warning', 5);
-        const coordenada = await ubicacion.obtenerCoordenada(direccionCompleta);
+        const coordenada = await ubicacion.obtenerCoordenada('Perú' + direccionCompleta);
         const distritoFormateado = distrito.replace(/\b\w/g, char => char.toUpperCase()).replace(/\s+/g, '_');
         const segmentos = await ubicacion.obtenerSegmentos(distritoFormateado);
         const segmentosFormateados = Object.values(segmentos).map(segmento => segmento.M.coordenada.S);
@@ -39,11 +39,12 @@ function clickUbicar() {
         (!distrito || !direccion) ? alertify.error('Indique el distrito y la dirección') : await actualizarUbicacion(distrito, direccion);
     });
 }
-
 function inputFormRanges() {
     let ranges = document.querySelectorAll('.inputRange');
     Array.from(ranges).forEach(range => {
-        let field = range.previousElementSibling;
+        console.log(range);
+        let field = range.previousElementSibling.querySelector('.inputNumber');
+        console.log(field);
         range.addEventListener('input', (e) => field.value = e.target.value);
         field.addEventListener('input', (e) => range.value = e.target.value);
     });
@@ -64,7 +65,7 @@ function validarFormularios() {
 
 async function inicializarMapa(callback) {
     try {
-        const coordenada = await ubicacion.obtenerCoordenada('Los Portales Santa Rosa');
+        const coordenada = await ubicacion.obtenerCoordenada('Av. Javier prado 6979, la Molina');
         ubicacion.mostrarMapa(coordenada.latitud, coordenada.longitud, document.getElementById('mapa'));
         callback();
     } catch (error) {
@@ -83,8 +84,9 @@ function whatsappLink(elementLink) {
 window.onload = async () => {
     validarFormularios();
     inputFormRanges();
-    const botonUbicar = document.getElementById('ubicar');
-    botonUbicar && await inicializarMapa(clickUbicar);
+
+    document.getElementById('formViabilidad') && await inicializarMapa(clickUbicar);
+    document.getElementById('formContacto') && await inicializarMapa(()=>{});
 
     const responseEvaluacion = document.getElementById('dataEvaluacion');
     responseEvaluacion && (() => {

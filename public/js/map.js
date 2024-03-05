@@ -23,7 +23,7 @@ async function obtenerCoordenada(direccion) {
     try {
         const coordenadaResponse = await axios.get(url);
         const coordenadasData = coordenadaResponse.data;
-
+        console.log(coordenadasData.results);
         const ubicacion = coordenadasData.results[0].geometry.location;
         const latitud = ubicacion.lat;
         const longitud = ubicacion.lng;

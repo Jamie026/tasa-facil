@@ -57,7 +57,7 @@ async function enviarEmail(evaluacionData, email, admin, usuarioData) {
         });
 
         const mailDetails = {
-            from: 'Tasa Fácil <tasafacil2024@gmail.com>',
+            from: 'REDIN Soluciones inmobiliarias <redinsolucionesinmobiliarias@gmail.com>',
             to: email,
             subject: 'Resultado de la evaluación.',
             text: 
@@ -79,7 +79,7 @@ async function enviarEmail(evaluacionData, email, admin, usuarioData) {
 
     } catch (error) {
         console.error(error);
-        errors.push("Error al generar PDF o al enviar correo.");
+        errors.push("Ha ocurrido un error al generar PDF o al enviar el correo.");
     }
 
     return errors;

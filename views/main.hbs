@@ -6,101 +6,102 @@
     <section class="parallax-container">
         <video class="parallax-multimedia" src="./img/presentacion.mp4" autoplay muted loop></video>
         <div class="item-center">
-            <p class="fs-1 fw-bold text-center text-uppercase text-light animate__animated animate__backInUp">Bienvenido a REDIN Soluciones inmobiliarias</p>
-            <p class="fs-2 text-light fw-light mb-3 text-center">Calcula el precio de tu inmueble aquí</p>
-            <a class="btn btn-light rounded-0 fw-bold" href="#card-form">
-                Empezar ahora
+            <p class="fs-1 fw-bold text-center text-uppercase text-light animate__animated animate__backInUp">¡Hola, bienvenido a la red inmobiliaria x!</p>
+            <p class="fs-5 w-75 text-light fw-light mb-4 text-center">Calcula el precio de tu  casa o terreno de manera fácil, gratuita y en línea, únete a la red inmobiliaria donde puedes conseguir el mejor precio de tu inmueble y conéctate con expertos del sector para que puedas vender e invertir de manera segura y confiable.</p>
+            <a class="btn btn-primary rounded-0 fw-bold" href="#card-form">
+                Empezar con la simulación
             </a>
         </div>
     </section>
     <section class="container my-5" id="card-form">
         <div class="row justify-content-center align-items-center">
             <div class="col-12">
-                <div class="card mt-4 border border-3 border-dark rounded">
+                <div class="card border border-3 border-dark rounded mt-4">
                     <div class="row">
                         <div class="col-sm-12 col-md-6">
                             <div id="mapa"></div>
                         </div>
                         <div class="col-sm-12 col-md-6">
                             <div class="card-body px-5">
-                                <h5 class="card-title text-center my-2 w-100">Evaluación de Viabilidad</h5>
-                                <h6 class="card-subtitle my-4 text-body-secondary text-center w-100">Ingrese todos los datos
-                                    solicitados</h6>
-                                <form class="row form px-0 g-3 needs-validation" method="POST" action="./viabilidad" novalidate id="formViabilidad">
+                                <h6 class="card-subtitle mt-2 mb-4 text-secondary text-center w-100">Evalua tu Inmueble - Ingrese los datos solicitados</h6>
+                                <form class="row form g-3 needs-validation" method="POST" action="./viabilidad" novalidate id="formViabilidad">
                                     <input type="hidden" name="segmento" id="segmento" value="0">
-                                    <div class="col-sm-12 col-md-6 mb-4">
+                                    <div class="col-sm-12 col-md-6">
                                         <input type="email" class="form-control" name="email" id="email"
                                             placeholder="Correo Electrónico" required>
                                         <div id="validationEmail" class="invalid-feedback">
                                             Debe ingresar su correo Electrónico
                                         </div>
                                     </div>
-                                    <div class="col-sm-12 col-md-6 mb-4">
+                                    <div class="col-sm-12 col-md-6">
                                         <input type="number" id="telefono" name="telefono" class="form-control"
                                             placeholder="Teléfono (Opcional)">
                                     </div>
-                                    <div class="col-sm-12 col-md-6 mb-4">
+                                    <div class="col-sm-12 col-md-6">
                                         <input type="text" class="form-control" name="direccion" id="direccion"
                                             placeholder="Calle o Avenida" required>
                                         <div id="validationDireccion" class="invalid-feedback">
                                             Debe ingresar la direccion
                                         </div>
                                     </div>
-                                    <div class="col-sm-12 col-md-6 mb-4">
+                                    <div class="col-sm-12 col-md-6">
                                         <input type="text" class="form-control" name="distrito" id="distrito" placeholder="Distrito"
                                             required>
                                         <div id="validationDistrito" class="invalid-feedback">
                                             Debe ingresar el distrito
                                         </div>
                                     </div>
-                                    <div class="col-12 mb-4">
+                                    <div class="col-12">
                                         <button class="btn btn-secondary w-100" type="button" id="ubicar">Registrar ubicación</button>
                                     </div>
-                                    <div class="col-12 mb-4">
-                                        <input type="text" class="form-control" name="ubicacion" id="ubicacionInput" placeholder="Ubicación Registrada"
-                                            onkeydown="event.preventDefault()" autocomplete="off" required>
-                                        <div id="validationUbicacion" class="invalid-feedback">
-                                            Debe registrar la ubicación
+                                    <div class="col-12">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text">1</span>
+                                            <input type="text" class="form-control" name="ubicacion" id="ubicacionInput" placeholder="Ubicación Registrada" onkeydown="event.preventDefault()" autocomplete="off" required>
+                                            <div id="validationUbicacion" class="invalid-feedback">
+                                                Debe registrar la ubicación
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 mb-2">
+                                    <div class="col-12">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="posicion"
-                                                id="medianero" value="medianero" checked>
-                                            <label class="form-check-label" for="medianero">Medianero</label>
+                                            <input class="form-check-input" type="radio" name="posicion" id="medianero" value="medianero" checked>
+                                            <label class="form-check-label" for="medianero">Lote medianero</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="posicion"
-                                                id="esquina" value="esquina">
-                                            <label class="form-check-label" for="esquina">Esquina</label>
+                                            <input class="form-check-input" type="radio" name="posicion" id="esquina" value="esquina">
+                                            <label class="form-check-label" for="esquina">Lote en esquina</label>
                                         </div>
                                     </div>
-                                    <div class="col-12 mb-2">
-                                        <input type="number" placeholder="Área (metros cuadrados)" class="form-control inputNumber" name="area" min="{{adminData.area_minima}}"
-                                            max="{{adminData.area_maxima}}" id="area" required>
-                                        <input type="range" class="form-range inputRange" name="area" min="{{adminData.area_minima}}"
-                                            max="{{adminData.area_maxima}}" id="area">
-                                        <div id="validationArea" class="invalid-feedback">
-                                            Debe indicar el área
+                                    <div class="col-12">
+                                        <div class="input-group">
+                                            <span class="input-group-text">2</span>
+                                            <input type="number" placeholder="Área (metros cuadrados)" class="form-control inputNumber" name="area" min="{{adminData.area_minima}}" max="{{adminData.area_maxima}}" id="area" required>
+                                            <div id="validationArea" class="invalid-feedback">
+                                                Debe indicar el área
+                                            </div>
                                         </div>
+                                        <input type="range" class="form-range inputRange" name="area" min="{{adminData.area_minima}}" max="{{adminData.area_maxima}}" id="area">
                                     </div>
-                                    <div class="col-12 mb-2">
-                                        <input type="number" placeholder="Altura máxima (pisos)" class="form-control inputNumber" name="altura" min="{{adminData.altura_minima_estandar}}"
-                                            max="{{adminData.altura_maxima_estandar}}" id="altura" required>
-                                        <input type="range" class="form-range inputRange" name="altura" min="{{adminData.altura_minima_estandar}}"
-                                            max="{{adminData.altura_maxima_estandar}}" id="altura">
-                                        <div id="validationAltura" class="invalid-feedback">
-                                            Debe indicar la altura
+                                    <div class="col-12">
+                                        <div class="input-group">
+                                            <span class="input-group-text">3</span>
+                                            <input type="number" placeholder="Altura máxima (pisos)" class="form-control inputNumber" name="altura" min="{{adminData.altura_minima_estandar}}" max="{{adminData.altura_maxima_estandar}}" id="altura" required>                                        
+                                            <div id="validationAltura" class="invalid-feedback">
+                                                Debe indicar la altura
+                                            </div>
                                         </div>
+                                        <input type="range" class="form-range inputRange" name="altura" min="{{adminData.altura_minima_estandar}}" max="{{adminData.altura_maxima_estandar}}" id="altura">
                                     </div>
-                                    <div class="col-12 mb-2">
-                                        <input type="number" placeholder="Precio por metro cuadrado en $" name="precio_m2" class="form-control inputNumber"
-                                            min="{{adminData.precio_m2_usd_terreno_cliente_minimo}}" max="{{adminData.precio_m2_usd_terreno_cliente_maximo}}" id="precio" required>
-                                        <input type="range" name="precio_m2" class="form-range inputRange"
-                                            min="{{adminData.precio_m2_usd_terreno_cliente_minimo}}" max="{{adminData.precio_m2_usd_terreno_cliente_maximo}}" id="precio">
-                                        <div id="validationPrecio" class="invalid-feedback">
-                                            Debe indicar el precio
+                                    <div class="col-12">
+                                        <div class="input-group">
+                                            <span class="input-group-text">4</span>
+                                            <input type="number" placeholder="Precio por metro cuadrado en $" name="precio_m2" class="form-control inputNumber" min="{{adminData.precio_m2_usd_terreno_cliente_minimo}}" max="{{adminData.precio_m2_usd_terreno_cliente_maximo}}" id="precio" required>
+                                            <div id="validationPrecio" class="invalid-feedback">
+                                                Debe indicar el precio
+                                            </div>
                                         </div>
+                                        <input type="range" name="precio_m2" class="form-range inputRange" min="{{adminData.precio_m2_usd_terreno_cliente_minimo}}" max="{{adminData.precio_m2_usd_terreno_cliente_maximo}}" id="precio">
                                     </div>
                                     <div class="col-12">
                                         <div class="form-check">
