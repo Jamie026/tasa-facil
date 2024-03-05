@@ -6,8 +6,8 @@
     <section class="parallax-container">
         <video class="parallax-multimedia" src="./img/presentacion.mp4" autoplay muted loop></video>
         <div class="item-center">
-            <p class="fs-1 fw-bold text-center text-uppercase text-light animate__animated animate__backInUp">¡Hola, bienvenido a la red inmobiliaria x!</p>
-            <p class="fs-5 w-75 text-light fw-light mb-4 text-center">Calcula el precio de tu  casa o terreno de manera fácil, gratuita y en línea, únete a la red inmobiliaria donde puedes conseguir el mejor precio de tu inmueble y conéctate con expertos del sector para que puedas vender e invertir de manera segura y confiable.</p>
+            <p class="title text-light animate__animated animate__backInUp">¡Hola, bienvenido a la red inmobiliaria x!</p>
+            <p class="normal w-75 text-light mb-4">Calcula el precio de tu  casa o terreno de manera fácil, gratuita y en línea, únete a la red inmobiliaria donde puedes conseguir el mejor precio de tu inmueble y conéctate con expertos del sector para que puedas vender e invertir de manera segura y confiable.</p>
             <a class="btn btn-primary rounded-0 fw-bold" href="#card-form">
                 Empezar con la simulación
             </a>
@@ -18,33 +18,33 @@
             <div class="col-12">
                 <div class="card border border-3 border-dark rounded mt-4">
                     <div class="row">
-                        <div class="col-sm-12 col-md-6">
+                        <div class="col-12 col-lg-6">
                             <div id="mapa"></div>
                         </div>
-                        <div class="col-sm-12 col-md-6">
+                        <div class="col-12 col-lg-6">
                             <div class="card-body px-5">
-                                <h6 class="card-subtitle mt-2 mb-4 text-secondary text-center w-100">Evalua tu Inmueble - Ingrese los datos solicitados</h6>
+                                <h6 class="subtitle mt-2 mb-4 text-secondary">Evalua tu Inmueble - Ingrese los datos solicitados</h6>
                                 <form class="row form g-3 needs-validation" method="POST" action="./viabilidad" novalidate id="formViabilidad">
                                     <input type="hidden" name="segmento" id="segmento" value="0">
-                                    <div class="col-sm-12 col-md-6">
+                                    <div class="col-12 col-lg-6">
                                         <input type="email" class="form-control" name="email" id="email"
                                             placeholder="Correo Electrónico" required>
                                         <div id="validationEmail" class="invalid-feedback">
                                             Debe ingresar su correo Electrónico
                                         </div>
                                     </div>
-                                    <div class="col-sm-12 col-md-6">
+                                    <div class="col-12 col-lg-6">
                                         <input type="number" id="telefono" name="telefono" class="form-control"
                                             placeholder="Teléfono (Opcional)">
                                     </div>
-                                    <div class="col-sm-12 col-md-6">
+                                    <div class="col-12 col-lg-6">
                                         <input type="text" class="form-control" name="direccion" id="direccion"
                                             placeholder="Calle o Avenida" required>
                                         <div id="validationDireccion" class="invalid-feedback">
                                             Debe ingresar la direccion
                                         </div>
                                     </div>
-                                    <div class="col-sm-12 col-md-6">
+                                    <div class="col-12 col-lg-6">
                                         <input type="text" class="form-control" name="distrito" id="distrito" placeholder="Distrito"
                                             required>
                                         <div id="validationDistrito" class="invalid-feedback">

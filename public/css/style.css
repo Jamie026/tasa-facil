@@ -108,8 +108,54 @@ body{
     font-size: 14px;
 }
 
-@media (max-width: 768px) {
+/*Textos*/
+.title{
+    font-size: 35px;
+    margin: auto 15px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.subtitle{
+    font-size: 20px;
+    text-align: center;
+}
+
+.normal{
+    font-size: 17px;
+    text-align: center;
+}
+
+.small {
+    font-size: 12px;
+    text-align: center;
+}
+
+/*Circle*/
+.circle{
+    border-radius: 50%;
+    border: lightskyblue solid 5px;
+    width: fit-content;
+}
+
+@media (max-width: 992px) {
     #mapa{
         height: 425px;
+    }
+
+    .title{
+        font-size: 30px;
+    }
+    
+    .subtitle{
+        font-size: 18px;
+    }
+    
+    .normal{
+        font-size: 15px;
+    }
+    
+    .small {
+        font-size: 12px;
     }
 }
