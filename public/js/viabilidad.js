@@ -1,9 +1,16 @@
 function formatearDato(key, data) {
-    return typeof data === 'number' ? 
-        (key === 'tc' ? data.toFixed(2) : 
-        (key === 'ROI_de_proyecto' || key === 'margen_%' ? Math.trunc((data * 100)) : Math.trunc(data))) :
-        typeof data === 'string' ? data.replace(/_/g, ' ').toUpperCase() :
-        data;
+    if (typeof data === 'number') {
+        if (key === 'tc') 
+            return data.toFixed(2);
+        else if (key === 'ROI_de_proyecto' || key === 'margen_%') 
+            return `${Math.trunc(data * 100)}%`;
+        else 
+            return Math.trunc(data);
+    }
+    else if (typeof data === 'string') 
+        return data.replace(/_/g, ' ').toUpperCase();
+    else
+        return data;
 }
 
 function checkViabilidad(tableElement, evaluacionData) {

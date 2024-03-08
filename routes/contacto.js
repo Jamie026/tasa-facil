@@ -4,24 +4,27 @@ const axios = require('axios');
 const contacto = express.Router();
 const nodemailer = require('nodemailer');
 
+function construirTextoAdmin(usuarioData) {
+    return `Un usuario acaba de llenar el formulario de contacto y ha proporcionado la siguiente información:\n
+        Nombre o razón social: ${usuarioData.nombre}
+        Teléfono: ${usuarioData.telefono}
+        Correo: ${usuarioData.email}
+        Motivo de contacto: ${usuarioData.motivo}
+        Descripción detallada de la solicitud: ${usuarioData.solicitud || 'No proporcionada'}`;
+}
+
+function construirTextoUsuario() {
+    return `Su solicitud fue enviada con éxito, nos aseguraremos de responderle lo antes posible.\n
+        Gracias por su paciencia.`;
+}
+
 async function enviarEmail(email, usuarioData, admin) {
     let errors = [];
-    let text = admin ? 
-        `Un usuario acaba de llenar el formulario de contacto y ha proporcionado la siguiente información:\n
-            Nombre o razón de social: ${usuarioData.nombre}\n
-            Teléfono: ${usuarioData.telefono}\n
-            Correo: ${usuarioData.email}\n
-            Motivo de contacto: ${usuarioData.motivo}\n
-            Descripción detallada de la solicitud: ${usuarioData.solicitud}\n` : 
-        `Su solicitud fue enviada con éxito, nos aseguraremos de responderle lo antes posible.\n 
-            Gracias por su paciencia.`
+    let text = admin ? construirTextoAdmin(usuarioData) : construirTextoUsuario();
     try {
         const mailTransporter = nodemailer.createTransport({
             service: 'gmail',
-            auth: {
-                user: process.env.GMAIL_USER,
-                pass: process.env.GMAIL_PASS
-            }
+            auth: { user: process.env.GMAIL_USER, pass: process.env.GMAIL_PASS }
         });
 
         const mailDetails = {
@@ -31,17 +34,11 @@ async function enviarEmail(email, usuarioData, admin) {
             text: text
         };
 
-        const sendMailPromise = new Promise((resolve, reject) => {
-            mailTransporter.sendMail(mailDetails, (error, response) => error? reject(error) : resolve(response));
-        });
-
-        await sendMailPromise;
-
+        mailTransporter.sendMail(mailDetails);
     } catch (error) {
         console.error(error);
         errors.push("Ha ocurrido un error al enviar el correo.");
     }
-
     return errors;
 }
 

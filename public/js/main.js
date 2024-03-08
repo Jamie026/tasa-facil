@@ -90,8 +90,9 @@ window.onload = async () => {
     document.getElementById('contactUs') && whatsappLink(document.getElementById('contactUs'));
 
     document.getElementById('dataEvaluacion') && (() => {
+        const responseEvaluacion = document.getElementById('dataEvaluacion');
         const dataEvaluacion = JSON.parse(responseEvaluacion.value);
-        responseEvaluacion.value = '';
+        responseEvaluacion.setAttribute('value', '');
         viabilidad.checkViabilidad('resumen', dataEvaluacion);
         whatsappLink(document.getElementById('botonWhatsapp'));
     })();

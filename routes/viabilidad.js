@@ -8,54 +8,56 @@ const handlebars = require('handlebars');
 const express = require('express');
 const viabilidad = express.Router();
 
-function formatearDato(data) {
-    return typeof data === 'number' ? data.toFixed(2) :
-        typeof data === 'string' ? data.replace(/_/g, ' ').toUpperCase() :
-        data;
+function formatearDato(key, data) {
+    if (typeof data === 'number') {
+        if (key === 'tc') 
+            return data.toFixed(2);
+        else if (key === 'ROI_de_proyecto' || key === 'margen_%') 
+            return `${Math.trunc(data * 100)}%`;
+        else 
+            return Math.trunc(data);
+    }
+    else if (typeof data === 'string') 
+        return data.replace(/_/g, ' ').toUpperCase();
+    else
+        return data;
 }
 
 function formatearResultados(objectData, secciones) {
     const result = {};
     secciones.forEach((seccion) => {
-        const seccionData = objectData.resultados[seccion];
+        const seccionData = objectData.resultados[seccion] || objectData[seccion];
         const seccionArray = [];
         for (const key in seccionData) 
-            seccionArray.push({ clave: formatearDato(key), valor: formatearDato(seccionData[key])});
-        result[formatearDato(seccion)] = seccionArray;
+            seccionArray.push({ clave: formatearDato(key, key), valor: formatearDato(key, seccionData[key]) });
+        result[formatearDato(seccion, seccion)] = seccionArray;
     });
     return result;
 }
 
 async function enviarEmail(evaluacionData, email, admin, usuarioData) {
     let errors = [];
-    const secciones = admin ? ['cabida_diseño', 'ventas', 'terreno', 'obras', 'evaluacion', 'financiamiento', 'resultados', 'resumen'] : ["resumen"];
-    const arraysDeObjetos = formatearResultados(evaluacionData, secciones);
-
+    const arraysDeObjetos = formatearResultados(evaluacionData, ['datos_usuario', 'cabida_diseño', 'ventas', 'terreno', 'obras', 'evaluacion', 'financiamiento', 'resultados', 'resumen']);
     try {
         const hbsFilePath = path.join(__dirname, '..', 'views', 'partials', 'email.hbs');
         const templateSource = await fs.readFile(hbsFilePath, 'utf-8');
         const template = handlebars.compile(templateSource, { noEscape: true });
         const output = template({ data: arraysDeObjetos });
 
-        const pdfPromise = new Promise((resolve, reject) => {
-            PDF.create(output, { childProcessOptions: { env: { OPENSSL_CONF: '/dev/null' }}}).toFile((error, response) => error ? reject(error) : resolve(response));
+        const pdfResponse = await new Promise((resolve, reject) => {
+            PDF.create(output, { childProcessOptions: { env: { OPENSSL_CONF: '/dev/null' } } }).toFile((error, response) => { error ? reject(error) : resolve(response) });
         });
 
-        const pdfResponse = await pdfPromise;
         const mailTransporter = nodemailer.createTransport({
             service: 'gmail',
-            auth: {
-                user: process.env.GMAIL_USER,
-                pass: process.env.GMAIL_PASS
-            }
+            auth: { user: process.env.GMAIL_USER, pass: process.env.GMAIL_PASS }
         });
 
         const mailDetails = {
             from: 'REDIN Soluciones inmobiliarias <redinsolucionesinmobiliarias@gmail.com>',
             to: email,
             subject: 'Resultado de la evaluación.',
-            text: 
-                `El siguiente PDF contiene información detallada de la evaluación.\n
+            text:`El siguiente PDF contiene información detallada de la evaluación.\n
                 Información del usuario:\n
                 Teléfono: ${usuarioData.telefono || 'No proporcionado'}\n
                 Correo: ${usuarioData.correo}\n`,
@@ -65,17 +67,11 @@ async function enviarEmail(evaluacionData, email, admin, usuarioData) {
             }
         };
 
-        const sendMailPromise = new Promise((resolve, reject) => {
-            mailTransporter.sendMail(mailDetails, (error, response) => error ? reject(error) : resolve(response));
-        });
-
-        await sendMailPromise;
-
+        mailTransporter.sendMail(mailDetails);
     } catch (error) {
         console.error(error);
         errors.push("Ha ocurrido un error al generar PDF o al enviar el correo.");
     }
-
     return errors;
 }
 
@@ -93,7 +89,7 @@ viabilidad.post('/', async (request, response) => {
         });
         const adminData = adminResponse.data;
         const evaluacionData = evaluacionResponse.data;
-        enviarEmail(evaluacionData, adminData.correo, true, evaluacionData.datos_usuario);
+        enviarEmail(evaluacionData, adminData.Correo, true, evaluacionData.datos_usuario);
         let errors = await enviarEmail(evaluacionData, evaluacionData.datos_usuario.correo, false, evaluacionData.datos_usuario);
         let messages = (errors.length !== 0) ? ["Evaluación realizada con éxito."] : ["Evaluación realizada con éxito", "La información fue enviada a su correo."];
         response.render('resumen', { errors: errors, success: messages, data: JSON.stringify(evaluacionData), adminTelefono: adminData.Codigo_de_telefono + adminData.Telefono });
