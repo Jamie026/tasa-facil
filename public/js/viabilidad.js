@@ -1,11 +1,16 @@
+function redondearPersonalizado(numero) {
+    const decimal = Number(numero.toString().split('.')[1].charAt(0));
+    return decimal > 5 ? Math.ceil(numero) : Math.floor(numero);
+}
+
 function formatearDato(key, data) {
     if (typeof data === 'number') {
         if (key === 'tc') 
             return data.toFixed(2);
-        else if (key === 'ROI_de_proyecto' || key === 'margen_%') 
-            return `${Math.trunc(data * 100)}%`;
+        else if (key === 'ROI_de_proyecto' || key === 'margen_%' || key === '%_de_departamentos_de_3D_x_piso' || key === '%_de_departamentos_de_2D_x_piso' || key === '%_de_departamentos_de_1D_x_piso') 
+            return `${redondearPersonalizado(data * 100)}%`;
         else 
-            return Math.trunc(data);
+            return redondearPersonalizado(data);
     }
     else if (typeof data === 'string') 
         return data.replace(/_/g, ' ').toUpperCase();

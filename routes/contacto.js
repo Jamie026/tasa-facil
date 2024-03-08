@@ -28,7 +28,7 @@ async function enviarEmail(email, usuarioData, admin) {
         });
 
         const mailDetails = {
-            from: 'REDIN Soluciones inmobiliarias <redinsolucionesinmobiliarias@gmail.com>',
+            from: 'REDIN Perú <redinperu@gmail.com>',
             to: email,
             subject: 'Formulario de contacto.',
             text: text
