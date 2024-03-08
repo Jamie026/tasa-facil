@@ -47,7 +47,7 @@ async function enviarEmail(email, usuarioData, admin) {
 
 contacto.get('/', async (request, response) => {
     try {
-        const adminResponse = await axios.get('https://4dbvkk2b12.execute-api.us-east-1.amazonaws.com/dev/tasafacil/listar_parametros');
+        const adminResponse = await axios.get('https://o7n3nvm6l1.execute-api.us-east-1.amazonaws.com/dev/tasafacil/listar_parametros');
         const adminData = adminResponse.data;
         const errors = request.query.errors ? request.query.errors.split(',') : [];
         const messages = request.query.messages ? request.query.messages.split(',') : [];
@@ -61,7 +61,7 @@ contacto.get('/', async (request, response) => {
 
 contacto.post('/enviarForm', async (request, response) => {
     try {
-        const adminResponse = await axios.get('https://4dbvkk2b12.execute-api.us-east-1.amazonaws.com/dev/tasafacil/listar_parametros');
+        const adminResponse = await axios.get('https://o7n3nvm6l1.execute-api.us-east-1.amazonaws.com/dev/tasafacil/listar_parametros');
         const adminData = adminResponse.data;
         let errors = await enviarEmail(adminData.correo, request.body, true);
         if (errors.length > 0) 

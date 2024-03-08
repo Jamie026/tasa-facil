@@ -1,5 +1,6 @@
 /*Font Family*/
 @font-face { font-family: telsa; src: url("./../font/Gotham\ Book.otf"); } 
+@font-face { font-family: telsaBold; src: url("./../font/Gotham\ Bold.otf"); } 
 
 /*Background*/
 body{
@@ -110,6 +111,7 @@ body{
 
 /*Textos*/
 .title{
+    font-family: telsaBold;
     font-size: 35px;
     margin: auto 15px;
     text-align: center;

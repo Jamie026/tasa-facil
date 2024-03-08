@@ -38,13 +38,7 @@ async function enviarEmail(evaluacionData, email, admin, usuarioData) {
         const output = template({ data: arraysDeObjetos });
 
         const pdfPromise = new Promise((resolve, reject) => {
-            PDF.create(output, {
-                childProcessOptions: {
-                    env: {
-                        OPENSSL_CONF: '/dev/null',
-                    }
-                }
-            }).toFile((error, response) => error? reject(error) : resolve(response));
+            PDF.create(output, { childProcessOptions: { env: { OPENSSL_CONF: '/dev/null' }}}).toFile((error, response) => error ? reject(error) : resolve(response));
         });
 
         const pdfResponse = await pdfPromise;
@@ -72,7 +66,7 @@ async function enviarEmail(evaluacionData, email, admin, usuarioData) {
         };
 
         const sendMailPromise = new Promise((resolve, reject) => {
-            mailTransporter.sendMail(mailDetails, (error, response) => error? reject(error) : resolve(response));
+            mailTransporter.sendMail(mailDetails, (error, response) => error ? reject(error) : resolve(response));
         });
 
         await sendMailPromise;
@@ -88,9 +82,9 @@ async function enviarEmail(evaluacionData, email, admin, usuarioData) {
 viabilidad.post('/', async (request, response) => {
     const data = request.body;
     try {
-        const tasaCambio = await axios.get("https://api.apis.net.pe/v1/tipo-cambio-sunat");
-        const adminResponse = await axios.get('https://4dbvkk2b12.execute-api.us-east-1.amazonaws.com/dev/tasafacil/listar_parametros');
-        const evaluacionResponse = await axios.post("https://4dbvkk2b12.execute-api.us-east-1.amazonaws.com/dev/tasafacil/evaluar_inmueble", {
+        const tasaCambio = await axios.get('https://api.apis.net.pe/v1/tipo-cambio-sunat');
+        const adminResponse = await axios.get('https://o7n3nvm6l1.execute-api.us-east-1.amazonaws.com/dev/tasafacil/listar_parametros');
+        const evaluacionResponse = await axios.post('https://o7n3nvm6l1.execute-api.us-east-1.amazonaws.com/dev/tasafacil/evaluar_inmueble', {
             "correo": data.email, "nombre": data.distrito.replace(/\b\w/g, char => char.toUpperCase()).replace(/\s+/g, '_'),
             "direccion": data.direccion, "segmento": data.segmento,
             "area": parseInt(data.area), "altura_max": parseInt(data.altura),

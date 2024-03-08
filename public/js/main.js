@@ -87,9 +87,9 @@ window.onload = async () => {
 
     document.getElementById('formViabilidad') && await inicializarMapa(clickUbicar);
     document.getElementById('formContacto') && await inicializarMapa(()=>{});
+    document.getElementById('contactUs') && whatsappLink(document.getElementById('contactUs'));
 
-    const responseEvaluacion = document.getElementById('dataEvaluacion');
-    responseEvaluacion && (() => {
+    document.getElementById('dataEvaluacion') && (() => {
         const dataEvaluacion = JSON.parse(responseEvaluacion.value);
         responseEvaluacion.value = '';
         viabilidad.checkViabilidad('resumen', dataEvaluacion);

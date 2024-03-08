@@ -52,7 +52,7 @@ function mostrarMapa(latitud, longitud, elementoMapa) {
 
 async function obtenerSegmentos(distrito) {
     try {
-        const segmentosResponse = await axios.post('https://4dbvkk2b12.execute-api.us-east-1.amazonaws.com/dev/tasafacil/listar_segmentos', { 
+        const segmentosResponse = await axios.post('https://o7n3nvm6l1.execute-api.us-east-1.amazonaws.com/dev/tasafacil/listar_segmentos', { 
             nombre: distrito 
         });
         return segmentosResponse.data.body.segmentos || [];

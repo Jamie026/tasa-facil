@@ -6,7 +6,7 @@
     <section class="parallax-container">
         <video class="parallax-multimedia" src="./img/presentacion.mp4" autoplay muted loop></video>
         <div class="item-center">
-            <p class="title text-light animate__animated animate__backInUp">¡Hola, bienvenido a la red inmobiliaria x!</p>
+            <p class="title text-light animate__animated animate__backInUp my-5">¡Hola, bienvenido a la red inmobiliaria x!</p>
             <p class="normal w-75 text-light mb-4">Calcula el precio de tu  casa o terreno de manera fácil, gratuita y en línea, únete a la red inmobiliaria donde puedes conseguir el mejor precio de tu inmueble y conéctate con expertos del sector para que puedas vender e invertir de manera segura y confiable.</p>
             <a class="btn btn-primary rounded-0 fw-bold" href="#card-form">
                 Empezar con la simulación
@@ -76,32 +76,32 @@
                                     <div class="col-12">
                                         <div class="input-group">
                                             <span class="input-group-text">2</span>
-                                            <input type="number" placeholder="Área (metros cuadrados)" class="form-control inputNumber" name="area" min="{{adminData.area_minima}}" max="{{adminData.area_maxima}}" id="area" required>
+                                            <input type="number" placeholder="Área (metros cuadrados)" class="form-control inputNumber" name="area" min="{{adminData.Area_minima}}" max="{{adminData.Area_maxima}}" id="area" required>
                                             <div id="validationArea" class="invalid-feedback">
                                                 Debe indicar el área
                                             </div>
                                         </div>
-                                        <input type="range" class="form-range inputRange" name="area" min="{{adminData.area_minima}}" max="{{adminData.area_maxima}}" id="area">
+                                        <input type="range" class="form-range inputRange" name="area" min="{{adminData.Area_minima}}" max="{{adminData.Area_maxima}}" id="area">
                                     </div>
                                     <div class="col-12">
                                         <div class="input-group">
                                             <span class="input-group-text">3</span>
-                                            <input type="number" placeholder="Altura máxima (pisos)" class="form-control inputNumber" name="altura" min="{{adminData.altura_minima_estandar}}" max="{{adminData.altura_maxima_estandar}}" id="altura" required>                                        
+                                            <input type="number" placeholder="Altura máxima (pisos)" class="form-control inputNumber" name="altura" min="{{adminData.Altura_minima_estandar}}" max="{{adminData.Altura_maxima_estandar}}" id="altura" required>                                        
                                             <div id="validationAltura" class="invalid-feedback">
                                                 Debe indicar la altura
                                             </div>
                                         </div>
-                                        <input type="range" class="form-range inputRange" name="altura" min="{{adminData.altura_minima_estandar}}" max="{{adminData.altura_maxima_estandar}}" id="altura">
+                                        <input type="range" class="form-range inputRange" name="altura" min="{{adminData.Altura_minima_estandar}}" max="{{adminData.Altura_maxima_estandar}}" id="altura">
                                     </div>
                                     <div class="col-12">
                                         <div class="input-group">
                                             <span class="input-group-text">4</span>
-                                            <input type="number" placeholder="Precio por metro cuadrado en $" name="precio_m2" class="form-control inputNumber" min="{{adminData.precio_m2_usd_terreno_cliente_minimo}}" max="{{adminData.precio_m2_usd_terreno_cliente_maximo}}" id="precio" required>
+                                            <input type="number" placeholder="Precio por metro cuadrado en $" name="precio_m2" class="form-control inputNumber" min="{{adminData.Precio_por_m2_minimo}}" max="{{adminData.Precio_por_m2_maximo}}" id="precio" required>
                                             <div id="validationPrecio" class="invalid-feedback">
                                                 Debe indicar el precio
                                             </div>
                                         </div>
-                                        <input type="range" name="precio_m2" class="form-range inputRange" min="{{adminData.precio_m2_usd_terreno_cliente_minimo}}" max="{{adminData.precio_m2_usd_terreno_cliente_maximo}}" id="precio">
+                                        <input type="range" name="precio_m2" class="form-range inputRange" min="{{adminData.Precio_por_m2_minimo}}" max="{{adminData.Precio_por_m2_maximo}}" id="precio">
                                     </div>
                                     <div class="col-12">
                                         <div class="form-check">
