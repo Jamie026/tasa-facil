@@ -96,7 +96,7 @@ viabilidad.post('/', async (request, response) => {
         enviarEmail(evaluacionData, adminData.correo, true, evaluacionData.datos_usuario);
         let errors = await enviarEmail(evaluacionData, evaluacionData.datos_usuario.correo, false, evaluacionData.datos_usuario);
         let messages = (errors.length !== 0) ? ["Evaluación realizada con éxito."] : ["Evaluación realizada con éxito", "La información fue enviada a su correo."];
-        response.render('resumen', { errors: errors, success: messages, data: JSON.stringify(evaluacionData), adminTelefono: adminData.codigo_de_telefono + adminData.telefono });
+        response.render('resumen', { errors: errors, success: messages, data: JSON.stringify(evaluacionData), adminTelefono: adminData.Codigo_de_telefono + adminData.Telefono });
     } catch (error) {
         console.log(error);
         response.redirect('/?errors=Ha+ocurrido+un+error+al+evaluar.+Intente+de+nuevo.');

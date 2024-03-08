@@ -6,7 +6,6 @@ router.get('/', async (request, response) => {
     try {
         const adminResponse = await axios.get('https://o7n3nvm6l1.execute-api.us-east-1.amazonaws.com/dev/tasafacil/listar_parametros');
         const adminData = adminResponse.data;
-        console.log(adminData);
         const errors = request.query.errors ? [request.query.errors] : [];
         const messages = request.query.messages ? [request.query.messages] : [];
         response.render('main', { adminData: adminData, errors: errors, messages: messages }); 

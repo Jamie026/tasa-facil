@@ -63,7 +63,7 @@ contacto.post('/enviarForm', async (request, response) => {
     try {
         const adminResponse = await axios.get('https://o7n3nvm6l1.execute-api.us-east-1.amazonaws.com/dev/tasafacil/listar_parametros');
         const adminData = adminResponse.data;
-        let errors = await enviarEmail(adminData.correo, request.body, true);
+        let errors = await enviarEmail(adminData.Correo, request.body, true);
         if (errors.length > 0) 
             throw new Error('Error al enviar el formulario');
         enviarEmail(request.body.email, request.body, false);
