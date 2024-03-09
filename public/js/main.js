@@ -86,6 +86,7 @@ window.onload = async () => {
     inputFormRanges();
 
     document.getElementById('formViabilidad') && await inicializarMapa(clickUbicar);
+    document.getElementById('mapaCorreo') && await inicializarMapa(()=>{});
     document.getElementById('formContacto') && await inicializarMapa(()=>{});
     document.getElementById('contactUs') && whatsappLink(document.getElementById('contactUs'));
 
