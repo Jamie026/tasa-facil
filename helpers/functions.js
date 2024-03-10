@@ -1,26 +1,29 @@
 const handlebars = require("handlebars");
 const nodemailer = require("nodemailer");
+const puppeteer = require("puppeteer");
 const fs = require("fs").promises;
-const PDF = require("html-pdf");
+const uuid = require("uuid").v4;
 const path = require("path");
 require("dotenv").config();
 
-async function crearPDF(plantillaNombre, data){
+async function crearPDF(plantillaNombre, data) {
     try {
         const plantillaRuta = path.join(__dirname, "..", "views", "templates", plantillaNombre);
         const plantillaEsquema = await fs.readFile(plantillaRuta, "utf-8");
         const plantilla = handlebars.compile(plantillaEsquema, { noEscape: true });
         const dataHTML = plantilla({ data: data });
-        const options = {
-            format: "A3",
-            childProcessOptions: { env: { OPENSSL_CONF: '/dev/null' }}
-        }
-        const PDFResponse = await new Promise((resolve, reject) => {
-            PDF.create(dataHTML, options).toFile((error, response) => {
-                error ? reject(error) : resolve(response);
-            });
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
+        await page.setContent(dataHTML);
+
+        const uniqueFilename = uuid() + ".pdf";
+        const filePath = path.join(__dirname, uniqueFilename);
+        await page.pdf({
+            path: filePath,
+            format: "A3"
         });
-        return PDFResponse;
+        await browser.close();
+        return filePath;
     } catch (error) {
         console.log(error);
         return false;
@@ -49,12 +52,10 @@ async function enviarArchivo(data, tipo, email) {
             plantillaNombre: "contacto.hbs"
         }
 
-        const PDFResponse = await crearPDF(options.plantillaNombre, data);
-
-        if(!PDFResponse) return false;
-
-        await prepararEnvio({ filename: "Información.pdf", path: PDFResponse.filename }, options, email);
-        await eliminarPDF(PDFResponse.filename);
+        const filePath = await crearPDF(options.plantillaNombre, data);
+        if(!filePath) return false;
+        await prepararEnvio({ filename: "Información.pdf", path: filePath }, options, email);
+        await eliminarPDF(filePath);
         return true;
     } catch (error) {
         console.log(error);

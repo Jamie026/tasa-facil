@@ -1,9 +1,10 @@
+require("dotenv").config();
 const axios = require("axios");
 const express = require("express");
 const viabilidad = express.Router();
 const { enviarArchivo, formatearTexto, desformatearTexto } = require("./../helpers/functions.js");
 
-function formatearObjecto(objectoData, admin) {
+function formatearObjecto(objectoData, secciones) {
 
     const formatearValue = (key, value) => {
         if (typeof value === "number") {
@@ -22,7 +23,6 @@ function formatearObjecto(objectoData, admin) {
     };
 
     const result = {};
-    const secciones = admin ? ["resumen_de_evaluacion", "Ingresos_y_egresos"] : ["informacion_de_predio", "analisis_arquitectonico", "analisis_financiero", "analisis_valor_terreno"];
     secciones.forEach((seccion) => {
         const seccionData = objectoData[seccion];
         const seccionArray = [];
@@ -38,8 +38,8 @@ viabilidad.post("/", async (request, response) => {
     const dataBody = request.body;
     try {
         const tasaCambio = await axios.get("https://api.apis.net.pe/v1/tipo-cambio-sunat");
-        const adminResponse = await axios.get("https://o7n3nvm6l1.execute-api.us-east-1.amazonaws.com/dev/tasafacil/listar_parametros");
-        const evaluacionResponse = await axios.post("https://o7n3nvm6l1.execute-api.us-east-1.amazonaws.com/dev/tasafacil/evaluar_inmueble", {
+        const adminResponse = await axios.get(process.env.RUTA_ADMIN);
+        const evaluacionResponse = await axios.post(process.env.RUTA_EVALUACION, {
             correo: dataBody.email, nombre: formatearTexto(dataBody.distrito),
             direccion: dataBody.direccion, segmento: dataBody.segmento,
             area: parseInt(dataBody.area), altura_max: parseInt(dataBody.altura),
@@ -52,15 +52,18 @@ viabilidad.post("/", async (request, response) => {
         const adminEnvio = { 
             correo: adminData.Correo,
             data: {
-                evaluacion: formatearObjecto(evaluacionData.admin, true),
-                imageMapa: dataBody.imageMapa
+                evaluacion: formatearObjecto(evaluacionData.admin, ["resumen_de_evaluacion"]),
+                imageMapa: dataBody.imageMapa,
+                graficaData: JSON.stringify(formatearObjecto(evaluacionData.admin, ["Ingresos_y_egresos"])),
+                admin: true
             }
         }
         const usuarioEnvio = {
             correo: evaluacionData.usuario.informacion_de_predio["Correo_electronico"],
             data: {
-                evaluacion: formatearObjecto(evaluacionData.usuario, false),
-                imageMapa: dataBody.imageMapa
+                evaluacion: formatearObjecto(evaluacionData.usuario, ["informacion_de_predio", "analisis_arquitectonico", "analisis_financiero", "analisis_valor_terreno"]),
+                imageMapa: dataBody.imageMapa,
+                admin: false
             }
         }
         const correosEnviados = await Promise.all([
@@ -69,7 +72,7 @@ viabilidad.post("/", async (request, response) => {
         ]);
         if (!correosEnviados[0] || !correosEnviados[1])
             throw new Error("Error durante la creación del PDF para el envio");
-        response.render("viabilidad", { success: ["Evaluación realizada con éxito"], data: JSON.stringify(usuarioEnvio.data.evaluacion), adminTelefono: adminTelefono});
+        response.render("viabilidad", { success: ["Evaluación realizada con éxito"], data: usuarioEnvio.data, adminTelefono: adminTelefono});
     } catch (error) {
         console.log(error);
         response.redirect("/?errors=Ha+ocurrido+un+error+al+evaluar.+Intente+de+nuevo.");

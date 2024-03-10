@@ -1,5 +1,4 @@
 import * as ubicacion from "./map.js";
-import * as viabilidad from "./viabilidad.js";
 
 function formatearTexto(texto) {
     return texto.replace(/\b\w/g, char => char.toUpperCase()).replace(/\s+/g, "_");
@@ -85,19 +84,32 @@ function whatsappLink(elementLink) {
     elementLink.href = isMobile ? appUrl : whatsappWebUrl;
 }
 
+function crearGrafica(titulo, data, elementHTML) {
+    const xArray = data.map(item => item.clave);
+    const yArray = data.map(item => item.valor);
+    const options = [{
+        values: xArray,
+        labels: yArray,
+        type: "pie"
+    }];
+    const layout = {
+        title: titulo,
+        height: 300
+    };
+    Plotly.newPlot(elementHTML, options, layout);
+}
+
 window.onload = async () => {
     validarFormularios();
     inputFormRanges();
 
     document.getElementById("formViabilidad") && (await inicializarMapa(clickUbicar));
     document.getElementById("formContacto") && (await inicializarMapa(() => {}));
-
     document.getElementById("contactUs") && whatsappLink(document.getElementById("contactUs"));
-    document.getElementById("dataEvaluacion") && (() => {
-        const responseEvaluacion = document.getElementById("dataEvaluacion");
-        const dataEvaluacion = JSON.parse(responseEvaluacion.value);
-        responseEvaluacion.setAttribute("value", "");
-        viabilidad.checkViabilidad("resumen", dataEvaluacion);
-        whatsappLink(document.getElementById("botonWhatsapp"));
-    })();
+    document.getElementById("dataEvaluacion") && whatsappLink(document.getElementById("botonWhatsapp"));
+    document.getElementById("graficaData") && (() =>{
+        const graficaElement = document.getElementById("graficaData");
+        const graficaData = JSON.parse(graficaElement.getAttribute("data-grafica"));
+        crearGrafica("Ingresos y Egresos", graficaData["Ingresos y egresos"], graficaElement);
+    })
 };

@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
+require("dotenv").config();
 
 router.get("/", async (request, response) => {
     try {
-        const adminResponse = await axios.get("https://o7n3nvm6l1.execute-api.us-east-1.amazonaws.com/dev/tasafacil/listar_parametros");
+        const adminResponse = await axios.get(process.env.RUTA_ADMIN);
         const adminData = adminResponse.data;
         const errors = request.query.errors ? [request.query.errors] : [];
         const messages = request.query.messages ? [request.query.messages] : [];
@@ -17,7 +18,7 @@ router.get("/", async (request, response) => {
 
 router.get("/informacion", async (request, response) => {
     try {
-        const adminResponse = await axios.get("https://o7n3nvm6l1.execute-api.us-east-1.amazonaws.com/dev/tasafacil/listar_parametros");
+        const adminResponse = await axios.get(process.env.RUTA_ADMIN);
         const adminData = adminResponse.data;
         const adminTelefono = adminData.Codigo_de_telefono + adminData.Telefono;
         response.render("informacion", { adminTelefono: adminTelefono });

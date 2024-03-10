@@ -1,11 +1,12 @@
-const express = require("express");
+require("dotenv").config();
 const axios = require("axios");
+const express = require("express");
 const contacto = express.Router();
 const { enviarArchivo } = require("./../helpers/functions.js");
 
 contacto.get("/", async (request, response) => {
     try {
-        const adminResponse = await axios.get("https://o7n3nvm6l1.execute-api.us-east-1.amazonaws.com/dev/tasafacil/listar_parametros");
+        const adminResponse = await axios.get(process.env.RUTA_ADMIN);
         const adminData = adminResponse.data;
         const errors = request.query.errors ? request.query.errors.split(",") : [];
         const messages = request.query.messages ? request.query.messages.split(",") : [];
@@ -19,7 +20,7 @@ contacto.get("/", async (request, response) => {
 contacto.post("/enviarForm", async (request, response) => {
     try {
         const dataBody = request.body;
-        const adminResponse = await axios.get("https://o7n3nvm6l1.execute-api.us-east-1.amazonaws.com/dev/tasafacil/listar_parametros");
+        const adminResponse = await axios.get(process.env.RUTA_ADMIN);
         const adminData = adminResponse.data;
         dataBody.solicitud = dataBody.solicitud ? dataBody.solicitud : "No proporciono una descripción";
         const usuarioEnvio = {
