@@ -14,10 +14,9 @@ function crearGrafica(titulo, data, elementHTML) {
 }
 
 window.onload = () => {
-    document.getElementById("open").innerText = "Hola";
-    document.getElementById("graficaData") && (() =>{
-        const graficaElement = document.getElementById("graficaData");
+    document.getElementById("grafica") && (() => {
+        const grafica = document.getElementById("grafica");
         const graficaData = JSON.parse(graficaElement.getAttribute("data-grafica"));
         crearGrafica("Ingresos y Egresos", graficaData["Ingresos y egresos"], graficaElement);
-    })
+    })();
 }
