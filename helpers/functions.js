@@ -50,6 +50,9 @@ async function enviarArchivo(data, tipo, email) {
         }
 
         const PDFResponse = await crearPDF(options.plantillaNombre, data);
+
+        if(!PDFResponse) return false;
+
         await prepararEnvio({ filename: "Información.pdf", path: PDFResponse.filename }, options, email);
         await eliminarPDF(PDFResponse.filename);
         return true;

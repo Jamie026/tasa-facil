@@ -21,17 +21,19 @@ contacto.post("/enviarForm", async (request, response) => {
         const dataBody = request.body;
         const adminResponse = await axios.get("https://o7n3nvm6l1.execute-api.us-east-1.amazonaws.com/dev/tasafacil/listar_parametros");
         const adminData = adminResponse.data;
-
+        dataBody.solicitud = dataBody.solicitud ? dataBody.solicitud : "No proporcionada";
         const usuarioEnvio = {
             correo: dataBody.email,
-            data: dataBody
+            data: {
+                solicitud: dataBody
+            }
         }
-        
         const adminEnvio = {
             correo: adminData.Correo,
-            data: dataBody
+            data: {
+                solicitud: dataBody
+            }
         }
-
         const correosEnviados = await Promise.all([
             enviarArchivo(adminEnvio.data, "contacto", adminEnvio.correo),
             enviarArchivo(usuarioEnvio.data, "contacto", usuarioEnvio.correo)

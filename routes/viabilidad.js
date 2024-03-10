@@ -46,7 +46,6 @@ viabilidad.post("/", async (request, response) => {
             precio_m2_dol: parseInt(dataBody.precio_m2), posicion: dataBody.posicion,
             tipo_cambio: tasaCambio.data.compra, telefono: dataBody.telefono
         });
-
         const adminData = adminResponse.data;
         const evaluacionData = evaluacionResponse.data;
         const adminTelefono = adminData.Codigo_de_telefono + adminData.Telefono;
@@ -68,7 +67,6 @@ viabilidad.post("/", async (request, response) => {
             enviarArchivo(usuarioEnvio.data, "viabilidad", usuarioEnvio.correo),
             enviarArchivo(adminEnvio.data, "viabilidad", adminEnvio.correo)
         ]);
-
         if (!correosEnviados[0] || !correosEnviados[1])
             throw new Error("Error durante la creación del PDF para el envio");
         response.render("viabilidad", { success: ["Evaluación realizada con éxito"], data: JSON.stringify(usuarioEnvio.data.evaluacion), adminTelefono: adminTelefono});
