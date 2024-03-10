@@ -21,7 +21,7 @@ contacto.post("/enviarForm", async (request, response) => {
         const dataBody = request.body;
         const adminResponse = await axios.get("https://o7n3nvm6l1.execute-api.us-east-1.amazonaws.com/dev/tasafacil/listar_parametros");
         const adminData = adminResponse.data;
-        dataBody.solicitud = dataBody.solicitud ? dataBody.solicitud : "No proporcionada";
+        dataBody.solicitud = dataBody.solicitud ? dataBody.solicitud : "No proporciono una descripción";
         const usuarioEnvio = {
             correo: dataBody.email,
             data: {
