@@ -52,7 +52,7 @@ viabilidad.post("/", async (request, response) => {
         const adminEnvio = { 
             correo: adminData.Correo,
             data: {
-                evaluacion: formatearObjecto({"resumen_de_evaluacion": evaluacionData.admin}, true),
+                evaluacion: formatearObjecto(evaluacionData.admin, true),
                 imageMapa: dataBody.imageMapa
             }
         }
