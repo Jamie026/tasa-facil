@@ -16,7 +16,7 @@ function crearGrafica(titulo, data, elementHTML) {
 window.onload = () => {
     document.getElementById("grafica") && (() => {
         const grafica = document.getElementById("grafica");
-        const graficaData = JSON.parse(graficaElement.getAttribute("data-grafica"));
+        const graficaData = JSON.parse(grafica.getAttribute("data-grafica"));
         crearGrafica("Ingresos y Egresos", graficaData["Ingresos y egresos"], graficaElement);
     })();
 }
