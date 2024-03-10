@@ -1,33 +1,7 @@
-require("dotenv").config();
 const express = require("express");
 const axios = require("axios");
 const contacto = express.Router();
-const nodemailer = require("nodemailer");
-
-async function enviarEmail(email, usuarioData) {
-    try {
-        const mailTransporter = nodemailer.createTransport({
-            service: "gmail",
-            auth: {
-                user: process.env.GMAIL_USER,
-                pass: process.env.GMAIL_PASS,
-            },
-        });
-
-        const mailDetails = {
-            from: "REDIN Perú <redinperu@gmail.com>",
-            to: email,
-            subject: "Formulario de contacto.",
-            text: `El siguiente archivo contiene información detallada de una solicitud de contacto realizada por medio de REDIN.`,
-        };
-
-        mailTransporter.sendMail(mailDetails);
-        return true;
-    } catch (error) {
-        console.error(error);
-        return false;
-    }
-}
+const { enviarArchivo } = require("./../helpers/functions.js");
 
 contacto.get("/", async (request, response) => {
     try {
@@ -44,12 +18,23 @@ contacto.get("/", async (request, response) => {
 
 contacto.post("/enviarForm", async (request, response) => {
     try {
+        const dataBody = request.body;
         const adminResponse = await axios.get("https://o7n3nvm6l1.execute-api.us-east-1.amazonaws.com/dev/tasafacil/listar_parametros");
         const adminData = adminResponse.data;
 
+        const usuarioEnvio = {
+            correo: dataBody.email,
+            data: dataBody
+        }
+        
+        const adminEnvio = {
+            correo: adminData.Correo,
+            data: dataBody
+        }
+
         const correosEnviados = await Promise.all([
-            enviarEmail(adminData.Correo, request.body),
-            enviarEmail(request.body.email, request.body)
+            enviarArchivo(adminEnvio.data, "contacto", adminEnvio.correo),
+            enviarArchivo(usuarioEnvio.data, "contacto", usuarioEnvio.correo)
         ]);
         if (!correosEnviados[0] || !correosEnviados[1])
             throw new Error("Error al enviar el formulario");

@@ -1,8 +1,6 @@
-/*Font Family*/
-@font-face { font-family: telsa; src: url("./../font/Gotham\ Book.otf"); } 
+@font-face { font-family: telsa; src: url("./../font/Gotham\ Book.otf"); }
 @font-face { font-family: telsaBold; src: url("./../font/Gotham\ Bold.otf"); } 
 
-/*Background*/
 body{
     background: url("./../img/fondo-inmobiliario.png") center no-repeat;
     background-size: cover;
@@ -10,7 +8,6 @@ body{
     background-attachment: fixed;
 }
 
-/*Navbar*/
 .navbar{
     width: 100%;
     z-index: 100;
@@ -30,7 +27,6 @@ body{
     transform: scale(1.1);
 }
 
-/*Parallax*/
 .parallax-container{
     position: relative;
     height: 100vh;
@@ -45,20 +41,16 @@ body{
     height: 100%;
 }
 
-/*Video*/
-#detach-button-host {
+#detach-button-host{
     display: none;
 }
 
-/*Mapa*/
 #mapa{
     height: 100%;
     width: 100%;
     padding: 20px;
-    z-index: 0;
 }
 
-/*Posicionamiento*/
 .item-center{
     padding: 20px;
     width: 100%;
@@ -70,10 +62,9 @@ body{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 1;
+    z-index: 50;
 }
 
-/*Tablas*/
 .table-data{
     width: 100%;
     border-collapse: collapse;
@@ -81,21 +72,18 @@ body{
 
 .table-data th{
     height: 20px;
-    font-size: 20px;
-    font-family: monospace;
-    text-align: center;
-    background-color: #0d6efd;
-    color: white;
+    background-color: lightblue;
+    color: black;
     padding: 5px;
+    border: 2px solid black;
 }
 
 .table-data td{
     height: 50px;
     padding: 15px;
-    text-align: center;
+    border: 2px solid black;
 }
 
-/*Alertas*/
 .alert{
     width: fit-content;
     position: fixed;
@@ -104,12 +92,10 @@ body{
     z-index: 100;
 }
 
-/*Formulario*/
 .form *{
     font-size: 14px;
 }
 
-/*Textos*/
 .title{
     font-family: telsaBold;
     font-size: 35px;
@@ -118,22 +104,22 @@ body{
     text-transform: uppercase;
 }
 
+.subtitle, .normal, .small{
+    text-align: center;
+}
+
 .subtitle{
     font-size: 20px;
-    text-align: center;
 }
 
 .normal{
     font-size: 17px;
-    text-align: center;
 }
 
 .small {
     font-size: 12px;
-    text-align: center;
 }
 
-/*Circle*/
 .circle{
     border-radius: 50%;
     border: lightskyblue solid 5px;

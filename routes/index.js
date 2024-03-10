@@ -19,7 +19,8 @@ router.get("/informacion", async (request, response) => {
     try {
         const adminResponse = await axios.get("https://o7n3nvm6l1.execute-api.us-east-1.amazonaws.com/dev/tasafacil/listar_parametros");
         const adminData = adminResponse.data;
-        response.render("informacion", { adminTelefono: adminData.Codigo_de_telefono + adminData.Telefono });
+        const adminTelefono = adminData.Codigo_de_telefono + adminData.Telefono;
+        response.render("informacion", { adminTelefono: adminTelefono });
     } catch (error) {
         console.error(error);
         response.render("informacion", { errors: ["Error al cargar los datos, recargue la página."] });
