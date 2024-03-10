@@ -15,7 +15,6 @@ async function crearPDF(plantillaNombre, data) {
         const browser = await puppeteer.launch();
         const page = await browser.newPage();
         await page.setContent(dataHTML);
-
         const uniqueFilename = uuid() + ".pdf";
         const filePath = path.join(__dirname, uniqueFilename);
         await page.pdf({
