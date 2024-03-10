@@ -22,7 +22,7 @@ function formatearObjecto(objectoData, admin) {
     };
 
     const result = {};
-    const secciones = admin ? ["resumen_de_evaluacion, Ingresos_y_egresos"] : ["informacion_de_predio", "analisis_arquitectonico", "analisis_financiero", "analisis_valor_terreno"];
+    const secciones = admin ? ["resumen_de_evaluacion", "Ingresos_y_egresos"] : ["informacion_de_predio", "analisis_arquitectonico", "analisis_financiero", "analisis_valor_terreno"];
     secciones.forEach((seccion) => {
         const seccionData = objectoData[seccion];
         const seccionArray = [];
