@@ -17,6 +17,7 @@ window.onload = () => {
     document.getElementById("grafica") && (() => {
         const grafica = document.getElementById("grafica");
         const graficaData = JSON.parse(grafica.getAttribute("data-grafica"));
+        grafica.innerText = grafica.getAttribute("data-grafica");
         crearGrafica("Ingresos y Egresos", graficaData["Ingresos y egresos"], grafica);
     })();
 }
