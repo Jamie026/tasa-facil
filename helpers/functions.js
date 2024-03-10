@@ -12,7 +12,7 @@ async function crearPDF(plantillaNombre, data){
         const plantilla = handlebars.compile(plantillaEsquema, { noEscape: true });
         const dataHTML = plantilla({ data: data });
         const options = {
-            format: "A4",
+            format: "A3",
             childProcessOptions: { env: { OPENSSL_CONF: '/dev/null' }}
         }
         const PDFResponse = await new Promise((resolve, reject) => {
