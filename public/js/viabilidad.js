@@ -1,13 +1,11 @@
 function crearGrafica(titulo, data, elementHTML) {
     const xArray = data.map(item => item.clave);
     const yArray = data.map(item => item.valor);
-
     const options = [{
         x: yArray,
         y: xArray,
         type: "bar",
-        text: yArray.map(valor => valor.fixed(2) + "%"),
-        hoverinfo: "text",
+        text: yArray.map(valor => valor.toFixed(2) + "%"),
         orientation: "h",
         marker: { color:"rgba(255,0,0,0.6)" }
     }];
@@ -23,7 +21,6 @@ function crearGrafica(titulo, data, elementHTML) {
             tickangle: -45,
             showline: true
         },
-        showlegend: true
     };
 
     Plotly.newPlot(elementHTML, options, layout);
