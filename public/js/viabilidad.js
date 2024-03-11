@@ -15,12 +15,13 @@ function crearGrafica(titulo, data, elementHTML) {
         title: titulo,
         margin: { l: 250 },
         yaxis: {
-            tickfont: { size: 10 },
+            tickfont: { size: 12 },
             tick: { pad: 100 },
             automargin: true,
             tickangle: -45,
             showline: true
         },
+        titlefont: { size: 24 }
     };
 
     Plotly.newPlot(elementHTML, options, layout, { displayModeBar: false });
