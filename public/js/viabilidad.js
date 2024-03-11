@@ -5,7 +5,7 @@ function crearGrafica(titulo, data, elementHTML) {
         x: yArray,
         y: xArray,
         type: "bar",
-        text: yArray.map(valor => valor.toFixed(2) + "%"),
+        text: yArray.map(valor => valor + "%"),
         orientation: "h",
         marker: { color:"rgba(255,0,0,0.6)" }
     }];
