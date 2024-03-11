@@ -13,6 +13,9 @@
                 <section class="col-12">
                     <img class="mx-3 my-5" src="https://redin.onrender.com/img/banner-dark.png" height="30" width="180" alt="Logo"/>
                 </section>
+                <div class="col-12">
+                    <p class="title mx-auto mt-5 mb-3">Resultado de la Evaluacion</p>
+                </div>
                 {{#each this}}
                     <section class="col-12">
                         {{#if evaluacion}}
@@ -49,14 +52,10 @@
                             </div>
                         {{/if}}
                         {{#if imageMapa}}
-                            <div class="row">
-                                <div class="col-12">
-                                    <p class="title mx-auto mt-5 mb-3">Plano de localización del predio</p>
-                                </div>
-                                <div class="col-12">
-                                    <div class="text-center mb-5">
-                                        <img src="{{imageMapa}}" alt="Mapa" class="img-fluid border border-dark border-4"/>
-                                    </div>
+                            <div class="container">
+                                <p class="title mx-auto mt-5 mb-3">Plano de localización del predio</p>
+                                <div class="text-center mb-5">
+                                    <img src="{{imageMapa}}" alt="Mapa" class="img-fluid border border-dark border-4"/>
                                 </div>
                             </div>
                         {{/if}}

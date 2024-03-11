@@ -11,9 +11,9 @@ function crearGrafica(titulo, data, elementHTML) {
     }];
     const layout = {
         height: 900,
-        width: 1000,
+        width: 1050,
         title: titulo,
-        margin: { l: 200 },
+        margin: { l: 250 },
         yaxis: {
             tickfont: { size: 10 },
             tick: { pad: 100 },
