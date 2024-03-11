@@ -12,12 +12,12 @@
                 <section class="col-12">
                     <img class="mx-3 my-5" src="https://redin.onrender.com/img/banner-dark.png" height="30" width="180" alt="Logo"/>
                 </section>
-                <div class="col-12">
+                <section class="col-12">
                     <p class="title mx-auto mt-5 mb-3">Solicitud de contacto recibida</p>
-                </div>
+                </section>
                 {{#each this}}
-                    <div class="col-10">
-                        <form class="container form">
+                    <section class="col-12">
+                        <form class="container form mx-auto mt-5 border border-dark border-3 rounded-3">
                             {{#if solicitud}}
                                 {{#with this.solicitud}}
                                     <div class="mb-3">
@@ -43,7 +43,7 @@
                                 {{/with}}
                             {{/if}}
                         </form>
-                    </div>
+                    </section>
                 {{/each}}
             </div>
         </main>
