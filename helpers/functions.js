@@ -12,7 +12,10 @@ async function crearPDF(plantillaNombre, data) {
         const plantillaEsquema = await fs.readFile(plantillaRuta, "utf-8");
         const plantilla = handlebars.compile(plantillaEsquema, { noEscape: true });
         const dataHTML = plantilla({ data: data });
-        const browser = await puppeteer.launch({ headless: true });
+        const browser = await puppeteer.launch({ 
+            headless: true,
+            args: ["--no-sandbox"] 
+        });
         const page = await browser.newPage();
         await page.setContent(dataHTML);
         const uniqueFilename = uuid() + ".pdf";
