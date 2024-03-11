@@ -6,6 +6,8 @@ function crearGrafica(titulo, data, elementHTML) {
         x: yArray,
         y: xArray,
         type: "bar",
+        text: yArray.map(valor => valor.fixed(2) + "%"),
+        hoverinfo: "text",
         orientation: "h",
         marker: { color:"rgba(255,0,0,0.6)" }
     }];
@@ -13,14 +15,15 @@ function crearGrafica(titulo, data, elementHTML) {
         height: 900,
         width: 1000,
         title: titulo,
-        margin: { l: 170 },
+        margin: { l: 200 },
         yaxis: {
             tickfont: { size: 10 },
-            tick: { pad: 90 },
+            tick: { pad: 100 },
             automargin: true,
             tickangle: -45,
             showline: true
-        }
+        },
+        showlegend: true
     };
 
     Plotly.newPlot(elementHTML, options, layout);
