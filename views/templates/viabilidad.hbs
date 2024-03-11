@@ -14,7 +14,7 @@
                     <img class="mx-3 my-5" src="https://redin.onrender.com/img/banner-dark.png" height="30" width="180" alt="Logo"/>
                 </section>
                 <div class="col-12">
-                    <p class="title mx-auto mt-5 mb-3">Resultado de la Evaluacion</p>
+                    <p class="title mx-auto mt-5 mb-5">Resultado de la Evaluacion</p>
                 </div>
                 {{#each this}}
                     <section class="col-12">
@@ -22,7 +22,7 @@
                             {{#with this.evaluacion}}
                                 {{#each this}}
                                     {{#if @key}}
-                                        <table class="table table-data w-75 mx-auto">
+                                        <table class="table table-data w-75 mx-auto mb-3">
                                             <tbody>
                                                 <tr>
                                                     <th class="subtitle text-capitalize" colspan="2">{{@key}}</th>
@@ -41,9 +41,7 @@
                         {{/if}}
                         {{#if admin}}
                             {{#with this.graficaData}}
-                            <div class="container text-center my-5">
-                                <div id="grafica">{{this}}</div>
-                            </div>
+                            <div id="grafica my-5">{{this}}</div>
                             {{/with}}
                         {{else}}
                             <div class="container mt-5">
