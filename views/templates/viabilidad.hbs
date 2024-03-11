@@ -22,7 +22,7 @@
                             {{#with this.evaluacion}}
                                 {{#each this}}
                                     {{#if @key}}
-                                        <table class="table table-data w-75 mx-auto mb-3">
+                                        <table class="table table-data w-75 mx-auto mb-5">
                                             <tbody>
                                                 <tr>
                                                     <th class="subtitle text-capitalize" colspan="2">{{@key}}</th>
@@ -41,9 +41,7 @@
                         {{/if}}
                         {{#if admin}}
                             {{#with this.graficaData}}
-                                <div class="container mt-5">
-                                    <div id="grafica" class="my-5">{{this}}</div>
-                                </div>
+                                <div id="grafica" class="my-5">{{this}}</div>
                             {{/with}}
                         {{else}}
                             <div class="container mt-5">
