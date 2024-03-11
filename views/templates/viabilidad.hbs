@@ -15,18 +15,6 @@
                 </section>
                 {{#each this}}
                     <section class="col-12">
-                        {{#if imageMapa}}
-                            <div class="row">
-                                <div class="col-12">
-                                    <p class="title mx-auto mt-5 mb-3">Plano de localización del predio</p>
-                                </div>
-                                <div class="col-12">
-                                    <div class="text-center mb-5">
-                                        <img src="{{imageMapa}}" alt="Mapa" class="img-fluid border border-dark border-4"/>
-                                    </div>
-                                </div>
-                            </div>
-                        {{/if}}
                         {{#if evaluacion}}
                             {{#with this.evaluacion}}
                                 {{#each this}}
@@ -58,6 +46,18 @@
                                 <p class="normal text-start">1. Para que un proyecto sea viable para un promotor o inversionista, el % minimo  de negociación del margen es 10%.</p>
                                 <p class="normal text-start">2. Los Valores de ingresos y egresos considerados en la evaluación son referenciales al estándar del mercado.</p>
                                 <p class="normal text-start">3. Para mayor detalle del valor de su predio, contactenos para poder encontrarle el mejor inversor,  al Telefono 991154824</p>
+                            </div>
+                        {{/if}}
+                        {{#if imageMapa}}
+                            <div class="row">
+                                <div class="col-12">
+                                    <p class="title mx-auto mt-5 mb-3">Plano de localización del predio</p>
+                                </div>
+                                <div class="col-12">
+                                    <div class="text-center mb-5">
+                                        <img src="{{imageMapa}}" alt="Mapa" class="img-fluid border border-dark border-4"/>
+                                    </div>
+                                </div>
                             </div>
                         {{/if}}
                     </section>

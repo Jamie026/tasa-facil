@@ -10,13 +10,13 @@ function crearGrafica(titulo, data, elementHTML) {
         marker: { color:"rgba(255,0,0,0.6)" }
     }];
     const layout = {
-        height: 800,
-        width: 700,
+        height: 900,
+        width: 1000,
         title: titulo,
         margin: { l: 170 },
         yaxis: {
             tickfont: { size: 10 },
-            tick: { pad: 50 },
+            tick: { pad: 90 },
             automargin: true,
             tickangle: -45,
             showline: true
