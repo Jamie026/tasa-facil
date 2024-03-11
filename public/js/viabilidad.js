@@ -21,6 +21,7 @@ function crearGrafica(titulo, data, elementHTML) {
             tickangle: -45,
             showline: true
         },
+        displayModeBar: false
     };
 
     Plotly.newPlot(elementHTML, options, layout);
