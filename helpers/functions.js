@@ -14,7 +14,11 @@ async function crearPDF(baseUrl, dataPDF) {
         const filePath = path.join(__dirname, uniqueFilename);
         await page.pdf({
             path: filePath,
-            format: "A3"
+            format: "A3",
+            margin: {
+                top: "15px",
+                bottom: "15px"
+            }
         });
         await browser.close();
         return filePath;
@@ -39,11 +43,11 @@ async function prepararEnvio(data, tipo, email) {
         const options = tipo === "viabilidad" ? {
             titulo: "Resultado de evaluación",
             texto: "El siguiente PDF contiene información detallada de la evaluación.",
-            baseUrl: "http://localhost:3000/viabilidad/PDF?data="
+            baseUrl: "https://app-redin-qrixjl7qeq-rj.a.run.app/viabilidad/PDF?data="
         } : {
             titulo: "Mensaje de contacto",
             texto: "El siguiente PDF contiene información detallada de la solicitud de contacto.",
-            baseUrl: "http://localhost:3000/contacto/PDF?data="
+            baseUrl: "https://app-redin-qrixjl7qeq-rj.a.run.app/contacto/PDF?data="
         }
 
         const filePath = await crearPDF(options.baseUrl, data);

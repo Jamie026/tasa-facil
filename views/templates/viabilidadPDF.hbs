@@ -1,20 +1,18 @@
 <main class="container-fluid">
-    <div class="row">
+    <div class="row justify-content-center">
         <section class="col-12">
             <img class="mx-3 my-5" src="/img/banner-dark.png" height="30" width="180" alt="Logo"/>
         </section>
         <section class="col-12">
-            <div class="container">
-                <h1 class="title mx-auto">Resultado de la Evaluacion</h1>
-            </div>
+            <h1 class="title mx-auto mb-5">Resultado de la Evaluacion</h1>
         </section>
         {{#each this}}
-            <section class="col-12">
-                {{#if evaluacion}}
+            {{#if evaluacion}}
+                <section class="col-10">
                     {{#with this.evaluacion}}
                         {{#each this}}
                             {{#if @key}}
-                                <table class="table table-data mx-auto mb-5">
+                                <table class="table table-data mb-5">
                                     <tbody>
                                         <tr>
                                             <th class="subtitle text-capitalize" colspan="2">{{@key}}</th>
@@ -30,29 +28,35 @@
                             {{/if}}
                         {{/each}}
                     {{/with}}
-                {{/if}}
-                {{#if admin}}
+                </section>    
+            {{/if}}
+            {{#if admin}}
+                <section class="col-12">
                     {{#with this.graficaData}}
                         <div id="grafica" class="my-5" data-grafica="{{this}}"></div>
                     {{/with}}
-                {{/if}}
-                {{#if usuario}}
-                    <div class="container">
+                </section>               
+            {{/if}}
+            {{#if usuario}}
+                <section class="col-10">
+                    <div class="container mx-auto">
                         <h3 class="normal text-start">Consideraciones:</h3> 
-                        <p class="normal text-start">1. Para que un proyecto sea viable para un promotor o inversionista, el % minimo  de negociación del margen es 10%.</p>
-                        <p class="normal text-start">2. Los Valores de ingresos y egresos considerados en la evaluación son referenciales al estándar del mercado.</p>
-                        <p class="normal text-start">3. Para mayor detalle del valor de su predio, contactenos para poder encontrarle el mejor inversor,  al Telefono 991154824</p>
+                        <p class="normal text-start lh-lg">1. Para que un proyecto sea viable para un promotor o inversionista, el % minimo  de negociación del margen es 10%.</p>
+                        <p class="normal text-start lh-lg">2. Los Valores de ingresos y egresos considerados en la evaluación son referenciales al estándar del mercado.</p>
+                        <p class="normal text-start lh-lg">3. Para mayor detalle del valor de su predio, contactenos para poder encontrarle el mejor inversor,  al Telefono 991154824</p>
                     </div>
-                {{/if}}
-                {{#if imageMapa}}
-                    <div class="container pt-3">
+                </section>
+            {{/if}}
+            {{#if imageMapa}}
+                <section class="col-12">
+                    <div class="container mt-5 pt-2">
                         <h1 class="title mx-auto my-5">Plano de localización del predio</h1>
                         <div class="text-center">
                             <img src="{{imageMapa}}" alt="Mapa" class="img-fluid border border-dark border-4"/>
                         </div>
                     </div>
-                {{/if}}
-            </section>
+                </section>
+            {{/if}}
         {{/each}}
     </div>
 </main>

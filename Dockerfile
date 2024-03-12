@@ -10,6 +10,8 @@ COPY package*.json ./
 # Instala las dependencias
 RUN npm install
 
+RUN npx puppeteer browsers install chrome
+
 # Copia el resto de los archivos de la aplicación
 COPY . .
 

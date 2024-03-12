@@ -1,17 +1,15 @@
 <main class="container-fluid">
-    <div class="row">
+    <div class="row justify-content-center align-items-center">
         <section class="col-12">
             <img class="mx-3 my-5" src="/img/banner-dark.png" height="30" width="180" alt="Logo"/>
         </section>
         <section class="col-12">
-            <div class="container">
-                <h1 class="title mx-auto">Solicitud de contacto recibida</h1>
-            </div>
+            <h1 class="title mx-auto mb-5">Solicitud de contacto recibida</h1>
         </section>
         {{#each this}}
-            <section class="col-12">
-                {{#if solicitud}}
-                    <form class="container form mx-auto mt-5 border border-dark border-3 rounded-3 px-4 py-5"></form>
+            {{#if solicitud}}
+                <section class="col-12">
+                    <form class="container form mx-auto mt-5 border border-dark border-3 rounded-3 px-4 py-5">
                         {{#with this.solicitud}}
                             <div class="mb-3">
                                 <label class="form-label">Nombre o Razón Social</label>
@@ -35,8 +33,8 @@
                             </div>
                         {{/with}}
                     </form>
-                {{/if}}
-            </section>
+                </section>
+            {{/if}}
         {{/each}}
     </div>
 </main>

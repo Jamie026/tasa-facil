@@ -15,7 +15,7 @@ function crearGrafica(titulo, data, elementHTML) {
         height: 900,
         width: 1200,
         title: titulo,
-        margin: { l: 350 },
+        margin: { l: 150 },
         yaxis: {
             tickfont: { size: 15 },
             tick: { pad: 90 },
