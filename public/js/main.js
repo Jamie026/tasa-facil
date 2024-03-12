@@ -1,5 +1,33 @@
 import * as ubicacion from "./map.js";
 
+function crearGrafica(titulo, data, elementHTML) {
+    const xArray = data.map(item => item.clave);
+    const yArray = data.map(item => item.valor);
+    const options = [{
+        x: yArray,
+        y: xArray,
+        type: "bar",
+        text: yArray.map(valor => valor + "%"),
+        orientation: "h",
+        marker: { color:"rgba(255,0,0,0.6)" }
+    }];
+    const layout = {
+        height: 900,
+        width: 1200,
+        title: titulo,
+        margin: { l: 350 },
+        yaxis: {
+            tickfont: { size: 15 },
+            tick: { pad: 90 },
+            automargin: true,
+            showline: true
+        },
+        titlefont: { size: 30 }
+    };
+
+    Plotly.newPlot(elementHTML, options, layout, { displayModeBar: false });
+}
+
 function formatearTexto(texto) {
     return texto.replace(/\b\w/g, char => char.toUpperCase()).replace(/\s+/g, "_");
 }
@@ -92,4 +120,9 @@ window.onload = async () => {
     document.getElementById("formContacto") && (await inicializarMapa(() => {}));
     document.getElementById("contactUs") && whatsappLink(document.getElementById("contactUs"));
     document.getElementById("dataEvaluacion") && whatsappLink(document.getElementById("botonWhatsapp"));
+    document.getElementById("grafica") && (() =>{
+        const grafica = document.getElementById("grafica");
+        const graficaData = JSON.parse(grafica.getAttribute("data-grafica"));
+        crearGrafica("Ingresos y Egresos", graficaData["Ingresos y egresos"], grafica);
+    })();
 };

@@ -6,24 +6,24 @@
     <section class="parallax-container">
         <video class="parallax-multimedia" src="./img/presentacion.mp4" autoplay muted loop></video>
         <div class="item-center">
-            <p class="title text-light animate__animated animate__backInUp my-5">¡Hola, bienvenido a la red inmobiliaria x!</p>
-            <p class="normal w-75 text-light mb-4">Calcula el precio de tu  casa o terreno de manera fácil, gratuita y en línea, únete a la red inmobiliaria donde puedes conseguir el mejor precio de tu inmueble y conéctate con expertos del sector para que puedas vender e invertir de manera segura y confiable.</p>
+            <h1 class="title text-light animate__animated animate__backInDown my-5">¡Hola, bienvenido a la red inmobiliaria!</h1>
+            <h3 class="normal w-75 lh-lg text-light mb-4">Calcula el precio de tu  casa o terreno de manera fácil, gratuita y en línea, únete a la red inmobiliaria donde puedes conseguir el mejor precio de tu inmueble y conéctate con expertos del sector para que puedas vender e invertir de manera segura y confiable.</h3>
             <a class="btn btn-primary rounded-0 fw-bold" href="#card-form">
                 Empezar con la simulación
             </a>
         </div>
     </section>
     <section class="container my-5" id="card-form">
-        <div class="row justify-content-center align-items-center">
+        <div class="row justify-content-center">
             <div class="col-12">
                 <div class="card border border-3 border-dark rounded mt-4">
                     <div class="row">
-                        <div class="col-12 col-lg-6">
+                        <div class="col-12 col-lg-6 pe-lg-0">
                             <div id="mapa"></div>
                         </div>
-                        <div class="col-12 col-lg-6">
-                            <div class="card-body px-5">
-                                <h6 class="subtitle mt-2 mb-4 text-secondary">Evalua tu Inmueble - Ingrese los datos solicitados</h6>
+                        <div class="col-12 col-lg-6 ps-lg-0">
+                            <div class="card-body px-5 bg-light">
+                                <h2 class="subtitle mt-2 mb-4 text-secondary">Evalua tu Inmueble - Ingrese los datos solicitados</h2>
                                 <form class="row form g-3 needs-validation" method="POST" action="./viabilidad" novalidate id="formViabilidad">
                                     <input type="hidden" name="imageMapa" id="imageMapa" value="0">
                                     <input type="hidden" name="segmento" id="segmento" value="0">
@@ -56,7 +56,7 @@
                                         <button class="btn btn-secondary w-100" type="button" id="ubicar">Registrar ubicación</button>
                                     </div>
                                     <div class="col-12">
-                                        <div class="input-group mb-3">
+                                        <div class="input-group">
                                             <span class="input-group-text">1</span>
                                             <input type="text" class="form-control" name="ubicacion" id="ubicacionInput" placeholder="Ubicación Registrada" onkeydown="event.preventDefault()" autocomplete="off" required>
                                             <div id="validationUbicacion" class="invalid-feedback">
@@ -65,11 +65,11 @@
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <div class="form-check form-check-inline">
+                                        <div class="form-check form-check-inline my-2">
                                             <input class="form-check-input" type="radio" name="posicion" id="medianero" value="medianero" checked>
                                             <label class="form-check-label" for="medianero">Lote medianero</label>
                                         </div>
-                                        <div class="form-check form-check-inline">
+                                        <div class="form-check form-check-inline my-2">
                                             <input class="form-check-input" type="radio" name="posicion" id="esquina" value="esquina">
                                             <label class="form-check-label" for="esquina">Lote en esquina</label>
                                         </div>
@@ -109,7 +109,7 @@
                                             <label class="form-check-label">
                                                 De acuerdo con los términos y condiciones
                                             </label>
-                                            <input class="form-check-input" type="checkbox" value="" required>
+                                            <input class="form-check-input border-primary" type="checkbox" value="" required>
                                             <div id="invalidCheckFeedback" class="invalid-feedback">
                                                 Debe aceptar antes de enviar el formulario
                                             </div>

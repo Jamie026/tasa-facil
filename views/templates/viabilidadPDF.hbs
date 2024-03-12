@@ -1,19 +1,20 @@
-{{> error}}
-{{> success}}
-{{> navbar}}
-
-<main class="container my-5 px-4">
-    <div class="row justify-content-center align-items-center">
+<main class="container-fluid">
+    <div class="row">
         <section class="col-12">
-            <h1 class="title text-light animate__animated animate__backInDown my-5">Resultado de la Evaluacion</h1>
+            <img class="mx-3 my-5" src="/img/banner-dark.png" height="30" width="180" alt="Logo"/>
         </section>
         <section class="col-12">
-            {{#each this}}
+            <div class="container">
+                <h1 class="title mx-auto">Resultado de la Evaluacion</h1>
+            </div>
+        </section>
+        {{#each this}}
+            <section class="col-12">
                 {{#if evaluacion}}
                     {{#with this.evaluacion}}
                         {{#each this}}
                             {{#if @key}}
-                                <table class="table table-data w-75 mx-auto mb-5">
+                                <table class="table table-data mx-auto mb-5">
                                     <tbody>
                                         <tr>
                                             <th class="subtitle text-capitalize" colspan="2">{{@key}}</th>
@@ -30,8 +31,13 @@
                         {{/each}}
                     {{/with}}
                 {{/if}}
+                {{#if admin}}
+                    {{#with this.graficaData}}
+                        <div id="grafica" class="my-5" data-grafica="{{this}}"></div>
+                    {{/with}}
+                {{/if}}
                 {{#if usuario}}
-                    <div class="container text-light">
+                    <div class="container">
                         <h3 class="normal text-start">Consideraciones:</h3> 
                         <p class="normal text-start">1. Para que un proyecto sea viable para un promotor o inversionista, el % minimo  de negociación del margen es 10%.</p>
                         <p class="normal text-start">2. Los Valores de ingresos y egresos considerados en la evaluación son referenciales al estándar del mercado.</p>
@@ -40,15 +46,13 @@
                 {{/if}}
                 {{#if imageMapa}}
                     <div class="container pt-3">
-                        <h1 class="title text-light my-5">Plano de localización del predio</h1>
+                        <h1 class="title mx-auto my-5">Plano de localización del predio</h1>
                         <div class="text-center">
                             <img src="{{imageMapa}}" alt="Mapa" class="img-fluid border border-dark border-4"/>
                         </div>
                     </div>
                 {{/if}}
-            {{/each}}
-        </section>
+            </section>
+        {{/each}}
     </div>
 </main>
-
-{{> footer}}

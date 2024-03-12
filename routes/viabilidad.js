@@ -2,7 +2,7 @@ require("dotenv").config();
 const axios = require("axios");
 const express = require("express");
 const viabilidad = express.Router();
-const { enviarArchivo, formatearTexto, desformatearTexto } = require("./../helpers/functions.js");
+const { formatearTexto, desformatearTexto, prepararEnvio } = require("./../helpers/functions.js");
 
 function formatearObjecto(objectoData, secciones) {
 
@@ -40,7 +40,7 @@ viabilidad.post("/", async (request, response) => {
         const tasaCambio = await axios.get("https://api.apis.net.pe/v1/tipo-cambio-sunat");
         const adminResponse = await axios.get(process.env.RUTA_ADMIN);
         const evaluacionResponse = await axios.post(process.env.RUTA_EVALUACION, {
-            correo: dataBody.email, nombre: formatearTexto(dataBody.distrito),
+            correo: dataBody.email, nombre: formatearTexto(dataBody.distrito.toLowerCase()),
             direccion: dataBody.direccion, segmento: dataBody.segmento,
             area: parseInt(dataBody.area), altura_max: parseInt(dataBody.altura),
             precio_m2_dol: parseInt(dataBody.precio_m2), posicion: dataBody.posicion,
@@ -63,20 +63,31 @@ viabilidad.post("/", async (request, response) => {
             data: {
                 evaluacion: formatearObjecto(evaluacionData.usuario, ["informacion_de_predio", "analisis_arquitectonico", "analisis_financiero", "analisis_valor_terreno"]),
                 imageMapa: dataBody.imageMapa,
-                admin: false
+                usuario: true
             }
         }
         const correosEnviados = await Promise.all([
-            enviarArchivo(usuarioEnvio.data, "viabilidad", usuarioEnvio.correo),
-            enviarArchivo(adminEnvio.data, "viabilidad", adminEnvio.correo)
+            prepararEnvio(usuarioEnvio.data, "viabilidad", usuarioEnvio.correo),
+            prepararEnvio(adminEnvio.data, "viabilidad", adminEnvio.correo)
         ]);
         if (!correosEnviados[0] || !correosEnviados[1])
             throw new Error("Error durante la creación del PDF para el envio");
-        response.render("viabilidad", { success: ["Evaluación realizada con éxito"], data: usuarioEnvio.data, adminTelefono: adminTelefono});
+        response.render("viabilidad", { success: ["La evaluación ha sido enviada a su correo."], data: usuarioEnvio.data, adminTelefono: adminTelefono});
     } catch (error) {
         console.log(error);
         response.redirect("/?errors=Ha+ocurrido+un+error+al+evaluar.+Intente+de+nuevo.");
     }
 });
+
+viabilidad.get("/PDF", (request, response) => {
+    try {
+        const data = JSON.parse(request.query.data);
+        response.render("viabilidadPDF", { data });
+    } catch (error) {
+        console.error('Error al procesar la solicitud:', error);
+        response.status(500).send('Error al procesar la solicitud');
+    }
+});
+
 
 module.exports = viabilidad;

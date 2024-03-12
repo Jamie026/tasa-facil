@@ -2,7 +2,7 @@ require("dotenv").config();
 const axios = require("axios");
 const express = require("express");
 const contacto = express.Router();
-const { enviarArchivo } = require("./../helpers/functions.js");
+const { prepararEnvio } = require("./../helpers/functions.js");
 
 contacto.get("/", async (request, response) => {
     try {
@@ -36,8 +36,8 @@ contacto.post("/enviarForm", async (request, response) => {
             }
         }
         const correosEnviados = await Promise.all([
-            enviarArchivo(adminEnvio.data, "contacto", adminEnvio.correo),
-            enviarArchivo(usuarioEnvio.data, "contacto", usuarioEnvio.correo)
+            prepararEnvio(adminEnvio.data, "contacto", adminEnvio.correo),
+            prepararEnvio(usuarioEnvio.data, "contacto", usuarioEnvio.correo)
         ]);
         if (!correosEnviados[0] || !correosEnviados[1])
             throw new Error("Error al enviar el formulario");
@@ -45,6 +45,16 @@ contacto.post("/enviarForm", async (request, response) => {
     } catch (error) {
         console.log(error);
         response.redirect("/contacto?errors=Ha+ocurrido+un+error+al+enviar+su+solicitud.+Intente+de+nuevo.");
+    }
+});
+
+contacto.get("/PDF", (request, response) => {
+    try {
+        const data = JSON.parse(request.query.data);
+        response.render("contactoPDF", { data });
+    } catch (error) {
+        console.error('Error al procesar la solicitud:', error);
+        response.status(500).send('Error al procesar la solicitud');
     }
 });
 

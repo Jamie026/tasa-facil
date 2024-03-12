@@ -1,11 +1,19 @@
 @font-face { font-family: telsa; src: url("./../font/Gotham\ Book.otf"); }
 @font-face { font-family: telsaBold; src: url("./../font/Gotham\ Bold.otf"); } 
 
+*{
+    box-sizing: border-box;
+}
+
 body{
     background: url("./../img/fondo-inmobiliario.png") center no-repeat;
     background-size: cover;
     font-family: telsa;
     background-attachment: fixed;
+}
+
+.mt-6{
+    margin-top: 130px;
 }
 
 .navbar{
@@ -68,6 +76,7 @@ body{
 .table-data{
     width: 100%;
     border-collapse: collapse;
+    word-wrap: break-word;
 }
 
 .table-data th{
@@ -87,8 +96,8 @@ body{
 .alert{
     width: fit-content;
     position: fixed;
-    bottom: 5%;
-    right: 5%;
+    bottom: 3%;
+    right: 3%;
     z-index: 100;
 }
 
@@ -117,7 +126,7 @@ body{
 }
 
 .small {
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .circle{

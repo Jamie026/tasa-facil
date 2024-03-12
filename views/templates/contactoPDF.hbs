@@ -1,0 +1,42 @@
+<main class="container-fluid">
+    <div class="row">
+        <section class="col-12">
+            <img class="mx-3 my-5" src="/img/banner-dark.png" height="30" width="180" alt="Logo"/>
+        </section>
+        <section class="col-12">
+            <div class="container">
+                <h1 class="title mx-auto">Solicitud de contacto recibida</h1>
+            </div>
+        </section>
+        {{#each this}}
+            <section class="col-12">
+                {{#if solicitud}}
+                    <form class="container form mx-auto mt-5 border border-dark border-3 rounded-3 px-4 py-5"></form>
+                        {{#with this.solicitud}}
+                            <div class="mb-3">
+                                <label class="form-label">Nombre o Razón Social</label>
+                                <input value="{{this.nombre}}" type="text" class="form-control"/>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Teléfono</label>
+                                <input value="{{this.telefono}}" type="text" class="form-control"/>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Correo Electrónico</label>
+                                <input value="{{this.email}}" type="email" class="form-control"/>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Motivo de contacto</label>
+                                <input value="{{this.motivo}}" type="text" class="form-control"/>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Descripcion detalla de la solicitud</label>
+                                <textarea class="form-control">{{this.solicitud}}</textarea>
+                            </div>
+                        {{/with}}
+                    </form>
+                {{/if}}
+            </section>
+        {{/each}}
+    </div>
+</main>
