@@ -7,7 +7,7 @@ require("dotenv").config();
 
 async function crearPDF(baseUrl, dataPDF) {
     try {
-        const browser = await puppeteer.launch();
+        const browser = await puppeteer.launch({ args: ["--no-sandbox"]});
         const page = await browser.newPage();        
         await page.goto(baseUrl + encodeURIComponent(JSON.stringify(dataPDF)));
         const uniqueFilename = uuid() + ".pdf";

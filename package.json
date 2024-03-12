@@ -4,6 +4,7 @@
     "description": "project ",
     "main": "index.js",
     "scripts": {
+        "gcp-build": "node node_modules/puppeteer/install.js",
         "test": "node index.js",
         "start": "node index.js"
     },
