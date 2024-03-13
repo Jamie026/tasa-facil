@@ -17,6 +17,11 @@ async function crearPDF(nameTemplate, dataPDF) {
         const options = {
             "format": "A3",
             "border": "20px",
+            "renderOptions": {
+                table: {
+                    style: "table-layout: page-break-inside: avoid;"
+                }
+            },
             "childProcessOptions": { env: { OPENSSL_CONF: '/dev/null' }}
         }
         await new Promise((resolve, reject) => {
