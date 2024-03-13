@@ -8,7 +8,7 @@ async function actualizarUbicacion(distrito, direccion) {
     const direccionCompleta = distrito + " " + direccion;
     try {
         alertify.notify("Actualizando ubicación...", "warning", 5);
-        const coordenada = await ubicacion.obtenerCoordenada("Perú" + direccionCompleta);
+        const coordenada = await ubicacion.obtenerCoordenada("Perú " + direccionCompleta);
         const segmentos = await ubicacion.obtenerSegmentos(formatearTexto(distrito));
         const segmentosFormateados = Object.values(segmentos).map((segmento) => segmento.M.coordenada.S);
         const mapaData = ubicacion.mostrarMapa(coordenada.latitud, coordenada.longitud, document.getElementById("mapa"));

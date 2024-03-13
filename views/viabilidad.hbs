@@ -11,31 +11,33 @@
             {{#each this}}
                 {{#if evaluacion}}
                     {{#with this.evaluacion}}
-                        {{#each this}}
-                            {{#if @key}}
-                                <table class="table table-data w-75 mx-auto mb-5">
-                                    <tbody>
-                                        <tr>
-                                            <th class="subtitle text-capitalize" colspan="2">{{@key}}</th>
-                                        </tr>
-                                        {{#each this}}
-                                            <tr>
-                                                <td class="normal w-50 text-start text-capitalize">{{clave}}</td>
-                                                <td class="normal w-50">{{valor}}</td>
-                                            </tr>
-                                        {{/each}}
-                                    </tbody>
-                                </table>
-                            {{/if}}
-                        {{/each}}
+                        <div class="container-fluid d-flex flex-column justify-content-center align-items-center">
+                            <table class="table table-data w-75 mb-5">
+                                {{#each this}}
+                                    {{#if @key}}
+                                            <tbody>
+                                                <tr>
+                                                    <th class="subtitle text-uppercase py-3" colspan="2">{{@key}}</th>
+                                                </tr>
+                                                {{#each this}}
+                                                    <tr>
+                                                        <td class="normal text-start text-capitalize">{{clave}}</td>
+                                                        <td class="normal">{{valor}}</td>
+                                                    </tr>
+                                                {{/each}}
+                                            </tbody>
+                                    {{/if}}
+                                {{/each}}
+                            </table>
+                        </div>
                     {{/with}}
                 {{/if}}
                 {{#if usuario}}
                     <div class="container text-light">
-                        <h3 class="normal lh-lg text-start">Consideraciones:</h3> 
-                        <p class="normal lh-lg text-start">1. Para que un proyecto sea viable para un promotor o inversionista, el % minimo  de negociación del margen es 10%.</p>
-                        <p class="normal lh-lg text-start">2. Los Valores de ingresos y egresos considerados en la evaluación son referenciales al estándar del mercado.</p>
-                        <p class="normal lh-lg text-start">3. Para mayor detalle del valor de su predio, contactenos para poder encontrarle el mejor inversor,  al Telefono 991154824</p>
+                        <h3 class="subtitle lh-lg text-center">Consideraciones:</h3> 
+                        <p class="normal lh-lg text-center">1. Para que un proyecto sea viable para un promotor o inversionista, el % minimo  de negociación del margen es 10%.</p>
+                        <p class="normal lh-lg text-center">2. Los Valores de ingresos y egresos considerados en la evaluación son referenciales al estándar del mercado.</p>
+                        <p class="normal lh-lg text-center">3. Para mayor detalle del valor de su predio, contactenos para poder encontrarle el mejor inversor,  al Telefono 991154824</p>
                     </div>
                 {{/if}}
                 {{#if imageMapa}}
