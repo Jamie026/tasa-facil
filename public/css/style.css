@@ -75,6 +75,7 @@ body{
 
 .table-data{
     width: 100%;
+    page-break-inside: avoid;
 }
 
 .table-data th{
