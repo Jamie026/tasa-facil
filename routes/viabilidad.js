@@ -79,15 +79,4 @@ viabilidad.post("/", async (request, response) => {
     }
 });
 
-viabilidad.get("/PDF", (request, response) => {
-    try {
-        const data = JSON.parse(request.query.data);
-        response.render("viabilidadPDF", { data });
-    } catch (error) {
-        console.error('Error al procesar la solicitud:', error);
-        response.status(500).send('Error al procesar la solicitud');
-    }
-});
-
-
 module.exports = viabilidad;

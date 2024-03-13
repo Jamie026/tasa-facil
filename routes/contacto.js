@@ -48,14 +48,4 @@ contacto.post("/enviarForm", async (request, response) => {
     }
 });
 
-contacto.get("/PDF", (request, response) => {
-    try {
-        const data = JSON.parse(request.query.data);
-        response.render("contactoPDF", { data });
-    } catch (error) {
-        console.error('Error al procesar la solicitud:', error);
-        response.status(500).send('Error al procesar la solicitud');
-    }
-});
-
 module.exports = contacto;
