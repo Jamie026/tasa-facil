@@ -40,7 +40,7 @@ viabilidad.post("/", async (request, response) => {
         const tasaCambio = await axios.get("https://api.apis.net.pe/v1/tipo-cambio-sunat");
         const adminResponse = await axios.get(process.env.RUTA_ADMIN);
         const evaluacionResponse = await axios.post(process.env.RUTA_EVALUACION, {
-            correo: dataBody.email, nombre: formatearTexto(dataBody.distrito.toLowerCase()),
+            correo: dataBody.email, nombre: formatearTexto((dataBody.distrito.trim()).toLowerCase()),
             direccion: dataBody.direccion, segmento: dataBody.segmento,
             area: parseInt(dataBody.area), altura_max: parseInt(dataBody.altura),
             precio_m2_dol: parseInt(dataBody.precio_m2), posicion: dataBody.posicion,
@@ -54,7 +54,7 @@ viabilidad.post("/", async (request, response) => {
             data: {
                 evaluacion: formatearObjecto(evaluacionData.admin, ["resumen_de_evaluacion"]),
                 imageMapa: dataBody.imageMapa,
-                graficaData: JSON.stringify(formatearObjecto(evaluacionData.admin, ["Ingresos_y_egresos"])),
+                graficaData: formatearObjecto(evaluacionData.admin, ["Ingresos_y_egresos"]),
                 admin: true
             }
         }

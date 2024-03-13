@@ -1,32 +1,37 @@
-const nodemailer = require("nodemailer");
-const puppeteer = require("puppeteer");
-const fs = require("fs").promises;
-const uuid = require("uuid").v4;
-const path = require("path");
 require("dotenv").config();
+const path = require("path");
+const uuid = require("uuid").v4;
+const PDF = require("html-pdf");
+const fs = require("fs").promises;  
+const nodemailer = require("nodemailer");
+const handlebars = require("handlebars");
 
-async function crearPDF(baseUrl, dataPDF) {
+async function crearPDF(nameTemplate, dataPDF) {
     try {
-        const browser = await puppeteer.launch({ args: ["--no-sandbox"]});
-        const page = await browser.newPage();        
-        await page.goto(baseUrl + encodeURIComponent(JSON.stringify(dataPDF)));
+        const hbsFilePath = path.join(__dirname, "..", "views", "templates", nameTemplate);
+        const templateSource = await fs.readFile(hbsFilePath, "utf-8");
+        const template = handlebars.compile(templateSource, { noEscape: true });
+        const dataHTML = template({ data: dataPDF });
         const uniqueFilename = uuid() + ".pdf";
         const filePath = path.join(__dirname, uniqueFilename);
-        await page.pdf({
-            path: filePath,
-            format: "A3",
-            margin: {
-                top: "15px",
-                bottom: "15px"
-            }
+        const options = {
+            "format": "A3",
+            "border": "20px",
+            "childProcessOptions": { env: { OPENSSL_CONF: '/dev/null' }}
+        }
+        await new Promise((resolve, reject) => {
+            PDF.create(dataHTML, options).toFile(filePath, (error, response) => {
+                error ? reject(error) : resolve(response);
+            });
         });
-        await browser.close();
+
         return filePath;
     } catch (error) {
         console.log(error);
         return false;
     }
 }
+
 
 async function eliminarPDF(archivoRuta) {
     try {
@@ -43,14 +48,14 @@ async function prepararEnvio(data, tipo, email) {
         const options = tipo === "viabilidad" ? {
             titulo: "Resultado de evaluación",
             texto: "El siguiente PDF contiene información detallada de la evaluación.",
-            baseUrl: "https://app-redin-qrixjl7qeq-rj.a.run.app/viabilidad/PDF?data="
+            template: "viabilidadPDF.hbs"
         } : {
             titulo: "Mensaje de contacto",
             texto: "El siguiente PDF contiene información detallada de la solicitud de contacto.",
-            baseUrl: "https://app-redin-qrixjl7qeq-rj.a.run.app/contacto/PDF?data="
+            template: "contactoPDF.hbs"
         }
 
-        const filePath = await crearPDF(options.baseUrl, data);
+        const filePath = await crearPDF(options.template, data);
         if(!filePath) return false;
         await enviarArchivo({ filename: "Información.pdf", path: filePath }, options, email);
         await eliminarPDF(filePath);
@@ -67,8 +72,8 @@ async function enviarArchivo(archivos, options, email) {
             service: "gmail",
             auth: {
                 user: process.env.GMAIL_USER,
-                pass: process.env.GMAIL_PASS
-            },
+                pass: process.env.GMAIL_PASS,
+            }
         });
 
         const mailDetails = {
@@ -86,12 +91,14 @@ async function enviarArchivo(archivos, options, email) {
     }
 }
 
-function desformatearTexto(texto){
+function desformatearTexto(texto) {
     return texto.replace(/_/g, " ");
-};
+}
 
-function formatearTexto(texto){
-    return texto.replace(/\b\w/g, char => char.toUpperCase()).replace(/\s+/g, "_");
+function formatearTexto(texto) {
+    return texto
+        .replace(/\b\w/g, (char) => char.toUpperCase())
+        .replace(/\s+/g, "_");
 }
 
 module.exports = { prepararEnvio, formatearTexto, desformatearTexto };
