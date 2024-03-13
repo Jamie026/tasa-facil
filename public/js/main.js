@@ -14,15 +14,14 @@ async function actualizarUbicacion(distrito, direccion) {
         const mapaData = ubicacion.mostrarMapa(coordenada.latitud, coordenada.longitud, document.getElementById("mapa"));
 
         let numSegmento = 0;
-        let encontrado = false;
-
-        segmentosFormateados.forEach((segmento, index) => {
-            if (encontrado) return;
-            if (ubicacion.perteneceSegmento({ latitud: coordenada.latitud, longitud: coordenada.longitud }, segmento)) {
+        
+        for (let index = 0; index < segmentosFormateados.length; index++) {
+            const segmento = segmentosFormateados[index];
+            if (!ubicacion.perteneceSegmento({ latitud: coordenada.latitud, longitud: coordenada.longitud }, segmento))
                 numSegmento = index + 1;
-                encontrado = true;
-            }
-        });
+            else 
+                break;
+        }
 
         document.getElementById("imageMapa").value = mapaData.mapImageURL;
         document.getElementById("segmento").value = numSegmento;

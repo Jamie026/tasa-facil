@@ -1,5 +1,4 @@
 <main style="padding: 20px; margin: 0;">
-    <div style="display: flex; justify-content: center;">
         <section style="width: 100%;">
             <img style="margin: 20px 0 50px 0;" src="https://app-redin-qrixjl7qeq-rj.a.run.app/img/banner-dark.png" height="30" width="180" alt="Logo"/>
         </section>
@@ -35,19 +34,17 @@
                     {{#with this.graficaData}}
                         {{#each this}}
                             {{#if @key}}
-                                <h2 style="text-align: center; margin-bottom: 20px; margin-top: 80px; font-size: 35px; text-transform: uppercase;">Gráfica de Ingresos y Egresos</h2>
-                                <div style="width: 60%; margin: auto;">
-                                    <div style="margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px; overflow: hidden; padding: 15px;">
-                                        {{#each this}}
-                                            <div style="display: flex; align-items: center; padding: 10px;">
-                                                <div style="flex: 0 0 auto; width: 100%; font-weight: bold; margin-bottom: 5px;">{{this.clave}}</div>
-                                                <div style="flex: 1; background-color: lightblue; height: 20px; border-radius: 5px; margin-right: 10px;">
-                                                    <div style="width: {{this.valor}}%; height: 100%; background-color: #007bff; border-radius: 5px;"></div>
-                                                </div>
-                                                <div style="flex: 0 0 auto; font-size: 14px;">{{this.valor}}%</div>
+                                <div style="width: 70%; margin: auto; margin-top: 100px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px; overflow: hidden; padding: 15px;">
+                                    <h2 style="text-align: center; margin-bottom: 20px; font-size: 24px; text-transform: capitalize;">Gráfica de Ingresos y Egresos</h2>
+                                    {{#each this}}
+                                        <div style="width: 100%; margin-bottom: 10px;">
+                                            <div style="font-weight: bold; margin-bottom: 10px;">{{this.clave}}</div>
+                                            <div style="background-color: lightblue; height: 20px; border-radius: 5px; margin-bottom: 8px; width: 100%;">
+                                                <div style="width: {{this.valor}}%; height: 100%; background-color: #007bff; border-radius: 5px;"></div>
                                             </div>
-                                        {{/each}}
-                                    </div>
+                                            <div style="font-size: 14px;">{{this.valor}}%</div>
+                                        </div>
+                                    {{/each}}
                                 </div>
                             {{/if}}
                         {{/each}}
@@ -56,7 +53,7 @@
             {{/if}}
             {{#if usuario}}
                 <section style="width: 100%;">
-                    <div style="margin: 0 auto; max-width: 800px;">
+                    <div style="margin: 100px auto 180px auto; max-width: 800px;">
                         <h3 style="text-align: left;">Consideraciones:</h3> 
                         <p style="text-align: justify; line-height: 1.5;">1. Para que un proyecto sea viable para un promotor o inversionista, el % minimo  de negociación del margen es 10%.</p>
                         <p style="text-align: justify; line-height: 1.5;">2. Los Valores de ingresos y egresos considerados en la evaluación son referenciales al estándar del mercado.</p>
@@ -67,7 +64,7 @@
             {{#if imageMapa}}
                 <section style="width: 100%;">
                     <div style="margin-top: 50px; padding-top: 20px; max-width: 800px; margin: 0 auto;">
-                        <h1 style="text-align: center; margin-bottom: 50px; font-size: 35px; text-transform: uppercase">Plano de localización del predio</h1>
+                        <h1 style="text-align: center; margin-bottom: 50px; font-size: 35px; text-transform: uppercase">Localización del predio</h1>
                         <div style="text-align: center;">
                             <img src="{{imageMapa}}" alt="Mapa" style="max-width: 100%; border: 4px solid #000;">
                         </div>
@@ -75,5 +72,4 @@
                 </section>
             {{/if}}
         {{/each}}
-    </div>
 </main>

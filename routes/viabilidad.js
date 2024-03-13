@@ -10,8 +10,8 @@ function formatearObjecto(objectoData, secciones) {
         if (typeof value === "number") {
             if (key === "Tipo_de_cambio") 
                 return value.toFixed(2);
-            else if (key === "%_de_departamentos_de_3D_x_piso" || key === "%_de_departamentos_de_2D_x_piso" || 
-                    key === "%_de_departamentos_de_1D_x_piso" || key === "Margen_%" || key === "ROI_de_proyecto")
+            else if (key === "%_de_departamentos_de_3D" || key === "%_de_departamentos_de_2D" || 
+                    key === "%_de_departamentos_de_1D" || key === "Margen_%" || key === "ROI_de_proyecto")
                 return (Math.round(value * 100)) + "%";
             else 
                 return new Intl.NumberFormat('en-US').format(Math.round(value));
