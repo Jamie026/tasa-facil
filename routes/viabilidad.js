@@ -37,31 +37,34 @@ function formatearObjecto(objectoData, secciones) {
 viabilidad.post("/", async (request, response) => {
     const dataBody = request.body;
     try {
-        const tasaCambio = await axios.get("https://api.apis.net.pe/v1/tipo-cambio-sunat");
-        const adminResponse = await axios.get(process.env.RUTA_ADMIN);
+        const dataResponses = await Promise.all([
+            axios.get("https://api.apis.net.pe/v1/tipo-cambio-sunat"),
+            axios.get(process.env.RUTA_ADMIN)
+        ]);
+        const tasaCambio = dataResponses[0].data;
+        const adminData = dataResponses[1].data;
         const evaluacionResponse = await axios.post(process.env.RUTA_EVALUACION, {
             correo: dataBody.email, nombre: formatearTexto((dataBody.distrito.trim()).toLowerCase()),
             direccion: dataBody.direccion, segmento: dataBody.segmento,
             area: parseInt(dataBody.area), altura_max: parseInt(dataBody.altura),
             precio_m2_dol: parseInt(dataBody.precio_m2), posicion: dataBody.posicion,
-            tipo_cambio: tasaCambio.data.compra, telefono: dataBody.telefono
+            tipo_cambio: tasaCambio.compra, telefono: dataBody.telefono
         });
-        const adminData = adminResponse.data;
         const evaluacionData = evaluacionResponse.data;
         const adminTelefono = adminData.Codigo_de_telefono + adminData.Telefono;
         const adminEnvio = { 
             correo: adminData.Correo,
             data: {
-                evaluacion: formatearObjecto(evaluacionData.admin, ["resumen_de_evaluacion"]),
+                evaluacion: formatearObjecto(evaluacionData.admin, ["resumen_de_evaluación"]),
                 imageMapa: dataBody.imageMapa,
                 graficaData: formatearObjecto(evaluacionData.admin, ["Ingresos_y_egresos"]),
                 admin: true
             }
         }
         const usuarioEnvio = {
-            correo: evaluacionData.usuario.informacion_de_predio["Correo_electronico"],
+            correo: evaluacionData.usuario["información_de_predio"]["Correo_electrónico"],
             data: {
-                evaluacion: formatearObjecto(evaluacionData.usuario, ["informacion_de_predio", "analisis_arquitectonico", "analisis_financiero", "analisis_valor_terreno"]),
+                evaluacion: formatearObjecto(evaluacionData.usuario, ["información_de_predio", "análisis_arquitectónico", "análisis_financiero", "análisis_valor_terreno"]),
                 imageMapa: dataBody.imageMapa,
                 usuario: true
             }

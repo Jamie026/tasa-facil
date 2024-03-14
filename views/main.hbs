@@ -42,14 +42,20 @@
                                         <input type="text" class="form-control" name="direccion" id="direccion"
                                             placeholder="Calle o Avenida" required>
                                         <div id="validationDireccion" class="invalid-feedback">
-                                            Debe ingresar la direccion
+                                            Debe ingresar la dirección
                                         </div>
                                     </div>
                                     <div class="col-12 col-lg-6">
-                                        <input type="text" class="form-control" name="distrito" id="distrito" placeholder="Distrito"
-                                            required>
-                                        <div id="validationDistrito" class="invalid-feedback">
-                                            Debe ingresar el distrito
+                                        <div class="input-group">
+                                            <select class="form-select" id="distrito" name="distrito" required>
+                                                <option selected disabled value="">Indique el distrito</option>
+                                                {{#each segmentos}}
+                                                    <option class="capitalize" value="{{this}}">{{this}}</option>
+                                                {{/each}}
+                                            </select>
+                                            <div id="validationdistrito" class="invalid-feedback">
+                                                Debe indicar su distrito
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -107,11 +113,11 @@
                                     <div class="col-12">
                                         <div class="form-check">
                                             <label class="form-check-label">
-                                                De acuerdo con los términos y condiciones
+                                                Acepto los términos y condiciones.
                                             </label>
                                             <input class="form-check-input border-primary" type="checkbox" value="" required>
                                             <div id="invalidCheckFeedback" class="invalid-feedback">
-                                                Debe aceptar antes de enviar el formulario
+                                                Debe aceptar los términos y condiciones
                                             </div>
                                         </div>
                                     </div>
