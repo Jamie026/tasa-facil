@@ -8,9 +8,7 @@ function formatearObjecto(objectoData, secciones) {
 
     const formatearValue = (key, value) => {
         if (typeof value === "number") {
-            if (key === "Tipo_de_cambio") 
-                return value.toFixed(2);
-            else if (key === "%_de_departamentos_de_3D" || key === "%_de_departamentos_de_2D" || 
+            if (key === "%_de_departamentos_de_3D" || key === "%_de_departamentos_de_2D" || 
                     key === "%_de_departamentos_de_1D" || key === "Margen_%" || key === "ROI_de_proyecto")
                 return (Math.round(value * 100)) + "%";
             else 
@@ -48,7 +46,7 @@ viabilidad.post("/", async (request, response) => {
             direccion: dataBody.direccion, segmento: dataBody.segmento,
             area: parseInt(dataBody.area), altura_max: parseInt(dataBody.altura),
             precio_m2_dol: parseInt(dataBody.precio_m2), posicion: dataBody.posicion,
-            tipo_cambio: tasaCambio.compra, telefono: dataBody.telefono
+            tipo_cambio: tasaCambio.compra.toFixed(3), telefono: dataBody.telefono
         });
         const evaluacionData = evaluacionResponse.data;
         const adminTelefono = adminData.Codigo_de_telefono + adminData.Telefono;

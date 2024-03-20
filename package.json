@@ -1,7 +1,7 @@
 {
-    "name": "tasa-facil",
+    "name": "redin---usuario",
     "version": "1.0.0",
-    "description": "project",
+    "description": "project redin",
     "main": "index.js",
     "scripts": {
         "test": "node index.js",

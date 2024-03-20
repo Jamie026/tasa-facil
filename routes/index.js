@@ -14,7 +14,7 @@ router.get("/", async (request, response) => {
         const adminData = dataResponses[1].data;
         const errors = request.query.errors ? [request.query.errors] : [];
         const messages = request.query.messages ? [request.query.messages] : [];
-        response.render("main", { adminData: adminData, errors: errors, messages: messages, segmentos: segmentos});
+        response.render("main", { adminData: adminData, errors: errors, messages: messages, segmentos: segmentos });
     } catch (error) {
         console.error(error);
         response.render("main", { errors: ["Error al cargar los datos, recargue la página."] });
