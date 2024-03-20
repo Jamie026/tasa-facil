@@ -93,9 +93,10 @@ body{
 }
 
 .alert{
-    width: fit-content;
+    width: 100%;
     position: fixed;
-    bottom: 3%;
+    bottom: 0%;
+    text-align: center;
     z-index: 100;
 }
 
