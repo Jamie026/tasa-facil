@@ -2,8 +2,10 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const path = require("path");
-const handlebars = require("express-handlebars");
+const session = require("express-session");
+const flash = require("connect-flash");
 const bodyParser = require("body-parser");
+const handlebars = require("express-handlebars");
 
 const port = process.env.PORT || 3000;
 
@@ -18,10 +20,23 @@ app.engine("hbs", handlebars.engine({
 
 app.set("views", [ path.join(__dirname, "views"), path.join(__dirname, "views/templates")]);
 
+app.use(session({
+    secret: "secret",
+    resave: true,
+    saveUninitialized: true
+}));
+
 app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(flash());
+
+app.use((request, response, next) => {
+    response.locals.success_msg = request.flash("success_msg");
+    response.locals.error_msg = request.flash("error_msg");
+    next();
+});
 
 const router = require("./routes/index.js");
 const contacto = require("./routes/contacto.js");

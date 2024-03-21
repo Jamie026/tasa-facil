@@ -75,10 +75,12 @@ viabilidad.post("/", async (request, response) => {
         ]);
         if (!correosEnviados[0] || !correosEnviados[1])
             throw new Error("Error durante la creación del PDF para el envio");
-        response.render("viabilidad", { success: ["La evaluación ha sido enviada a su correo."], data: usuarioEnvio.data, adminTelefono: adminTelefono});
+        request.flash("success_msg", "La evaluación ha sido enviada a su correo.");
+        response.render("viabilidad", { data: usuarioEnvio.data, adminTelefono: adminTelefono});
     } catch (error) {
         console.log(error);
-        response.redirect("/?errors=Ha+ocurrido+un+error+al+evaluar.+Intente+de+nuevo.");
+        request.flash("error_msg", "Ha ocurrido un error al evaluar, intente de nuevo.");
+        response.redirect("/");
     }
 });
 

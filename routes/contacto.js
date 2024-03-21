@@ -8,12 +8,11 @@ contacto.get("/", async (request, response) => {
     try {
         const adminResponse = await axios.get(process.env.RUTA_ADMIN);
         const adminData = adminResponse.data;
-        const errors = request.query.errors ? request.query.errors.split(",") : [];
-        const success = request.query.success ? request.query.success.split(",") : [];
-        response.render("contacto", { adminData: adminData, errors: errors, success: success });
+        response.render("contacto", { adminData: adminData });
     } catch (error) {
         console.error(error);
-        response.render("contacto", { errors: ["Error al cargar los datos, recargue la página."] });
+        request.flash("error_msg", "Error al cargar los datos, recargue la página.");
+        response.render("contacto");
     }
 });
 
@@ -41,10 +40,12 @@ contacto.post("/enviarForm", async (request, response) => {
         ]);
         if (!correosEnviados[0] || !correosEnviados[1])
             throw new Error("Error al enviar el formulario");
-        response.redirect("/contacto?success=Su+solicitud+ha+sido+enviada+correctamente.");
+        request.flash("success_msg", "Su solicitud de contacto ha sido enviada con éxito.");
+        response.redirect("/contacto");
     } catch (error) {
         console.log(error);
-        response.redirect("/contacto?errors=Ha+ocurrido+un+error+al+enviar+su+solicitud.+Intente+de+nuevo.");
+        request.flash("error_msg", "Error al enviar su solicitud de contacto.");
+        response.redirect("/contacto");
     }
 });
 
