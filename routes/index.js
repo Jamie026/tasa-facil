@@ -13,8 +13,8 @@ router.get("/", async (request, response) => {
         const segmentos = JSON.parse(dataResponses[0].data.body).map(segmento => desformatearTexto(segmento));
         const adminData = dataResponses[1].data;
         const errors = request.query.errors ? [request.query.errors] : [];
-        const messages = request.query.messages ? [request.query.messages] : [];
-        response.render("main", { adminData: adminData, errors: errors, messages: messages, segmentos: segmentos });
+        const success = request.query.success ? [request.query.success] : [];
+        response.render("main", { adminData: adminData, errors: errors, success: success, segmentos: segmentos });
     } catch (error) {
         console.error(error);
         response.render("main", { errors: ["Error al cargar los datos, recargue la página."] });

@@ -32,3 +32,12 @@ app.use("/contacto", contacto);
 app.use("/viabilidad", viabilidad);
 
 app.listen(port, () => console.log("App listening to port " + port));
+
+app.use((request, response, next) => {
+    return response.status(404).render("404");
+});
+  
+app.use((error, request, response, next) => {
+    response.status(error.status || 500);
+    response.render("error", { error });
+});
