@@ -1,0 +1,135 @@
+{{> error}}
+{{> success}}
+{{> navbar}}
+
+<main class="container-fluid px-0">
+    <section class="parallax-container">
+        <video class="parallax-multimedia" src="./img/presentacion.mp4" autoplay muted loop></video>
+        <div class="item-center">
+            <h1 class="title text-light animate__animated animate__backInDown my-5">¡Hola, bienvenido a la red inmobiliaria!</h1>
+            <h3 class="normal w-75 lh-lg text-light mb-4">Calcula el precio de tu  casa o terreno de manera fácil, gratuita y en línea, únete a la red inmobiliaria donde puedes conseguir el mejor precio de tu inmueble y conéctate con expertos del sector para que puedas vender e invertir de manera segura y confiable.</h3>
+            <a class="btn btn-primary rounded-0 fw-bold" href="#card-form">
+                Empezar con la simulación
+            </a>
+        </div>
+    </section>
+    <section class="container my-5" id="card-form">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="card border border-3 border-dark rounded mt-4">
+                    <div class="row">
+                        <div class="col-12 col-lg-6 pe-lg-0">
+                            <div id="mapa"></div>
+                        </div>
+                        <div class="col-12 col-lg-6 ps-lg-0">
+                            <div class="card-body px-5 bg-light">
+                                <h2 class="subtitle mt-2 mb-4 text-secondary">Evalua tu Inmueble - Ingrese los datos solicitados</h2>
+                                <form class="row form g-3 needs-validation" method="POST" action="./viabilidad" novalidate id="formViabilidad">
+                                    <input type="hidden" name="imageMapa" id="imageMapa" value="0">
+                                    <input type="hidden" name="segmento" id="segmento" value="0">
+                                    <div class="col-12 col-lg-6">
+                                        <input type="email" class="form-control" name="email" id="email"
+                                            placeholder="Correo Electrónico" required>
+                                        <div id="validationEmail" class="invalid-feedback">
+                                            Debe ingresar su correo Electrónico
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        <input type="number" id="telefono" name="telefono" class="form-control"
+                                            placeholder="Teléfono (Opcional)">
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        <input type="text" class="form-control" name="direccion" id="direccion"
+                                            placeholder="Calle o Avenida" required>
+                                        <div id="validationDireccion" class="invalid-feedback">
+                                            Debe ingresar la dirección
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        <div class="input-group">
+                                            <select class="form-select" id="distrito" name="distrito" required>
+                                                <option selected disabled value="">Indique el distrito</option>
+                                                {{#each distritos}}
+                                                    <option class="capitalize" value="{{this}}">{{this}}</option>
+                                                {{/each}}
+                                            </select>
+                                            <div id="validationdistrito" class="invalid-feedback">
+                                                Debe indicar su distrito
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <button class="btn btn-secondary w-100" type="button" id="ubicar">Registrar ubicación</button>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group">
+                                            <span class="input-group-text">1</span>
+                                            <input type="text" class="form-control" name="ubicacion" id="ubicacionInput" placeholder="Ubicación Registrada" onkeydown="event.preventDefault()" autocomplete="off" required>
+                                            <div id="validationUbicacion" class="invalid-feedback">
+                                                Debe registrar la ubicación
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-check form-check-inline my-2">
+                                            <input class="form-check-input" type="radio" name="posicion" id="medianero" value="medianero" checked>
+                                            <label class="form-check-label" for="medianero">Lote medianero</label>
+                                        </div>
+                                        <div class="form-check form-check-inline my-2">
+                                            <input class="form-check-input" type="radio" name="posicion" id="esquina" value="esquina">
+                                            <label class="form-check-label" for="esquina">Lote en esquina</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group">
+                                            <span class="input-group-text">2</span>
+                                            <input type="number" placeholder="Área Lote ( m2)" class="form-control inputNumber" name="area" min="{{adminData.Area_minima}}" max="{{adminData.Area_maxima}}" id="area" required>
+                                            <div id="validationArea" class="invalid-feedback">
+                                                Debe indicar el área
+                                            </div>
+                                        </div>
+                                        <input type="range" class="form-range inputRange" name="area" min="{{adminData.Area_minima}}" max="{{adminData.Area_maxima}}" id="area">
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group">
+                                            <span class="input-group-text">3</span>
+                                            <input type="number" placeholder="Altura máxima (pisos)" class="form-control inputNumber" name="altura" min="{{adminData.Altura_minima_estandar}}" max="{{adminData.Altura_maxima_estandar}}" id="altura" required>                                        
+                                            <div id="validationAltura" class="invalid-feedback">
+                                                Debe indicar la altura
+                                            </div>
+                                        </div>
+                                        <input type="range" class="form-range inputRange" name="altura" min="{{adminData.Altura_minima_estandar}}" max="{{adminData.Altura_maxima_estandar}}" id="altura">
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group">
+                                            <span class="input-group-text">4</span>
+                                            <input type="number" placeholder="Precio x m2 ( US$)" name="precio_m2" class="form-control inputNumber" min="{{adminData.Precio_por_m2_minimo}}" max="{{adminData.Precio_por_m2_maximo}}" id="precio" required>
+                                            <div id="validationPrecio" class="invalid-feedback">
+                                                Debe indicar el precio
+                                            </div>
+                                        </div>
+                                        <input type="range" name="precio_m2" class="form-range inputRange" min="{{adminData.Precio_por_m2_minimo}}" max="{{adminData.Precio_por_m2_maximo}}" id="precio">
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                Acepto los términos y condiciones.
+                                            </label>
+                                            <input class="form-check-input border-primary" type="checkbox" value="" required>
+                                            <div id="invalidCheckFeedback" class="invalid-feedback">
+                                                Debe aceptar los términos y condiciones
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Evaluar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+{{> footer}}

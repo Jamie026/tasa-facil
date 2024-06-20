@@ -1,0 +1,56 @@
+{{> error}}
+{{> success}}
+{{> navbar}}
+
+<main class="container my-5 px-4">
+    <div class="row justify-content-center align-items-center">
+        <section class="col-12">
+            <h1 class="title text-light animate__animated animate__backInDown my-5">Resultado de la Evaluacion</h1>
+        </section>
+        <section class="col-12">
+            {{#each this}}
+                {{#if evaluacion}}
+                    {{#with this.evaluacion}}
+                        <div class="container-fluid d-flex flex-column justify-content-center align-items-center">
+                            <table class="table table-data w-75 mb-5">
+                                {{#each this}}
+                                    {{#if @key}}
+                                            <tbody>
+                                                <tr>
+                                                    <th class="subtitle text-uppercase py-3" colspan="2">{{@key}}</th>
+                                                </tr>
+                                                {{#each this}}
+                                                    <tr>
+                                                        <td class="normal text-start text-capitalize">{{clave}}</td>
+                                                        <td class="normal">{{valor}}</td>
+                                                    </tr>
+                                                {{/each}}
+                                            </tbody>
+                                    {{/if}}
+                                {{/each}}
+                            </table>
+                        </div>
+                    {{/with}}
+                {{/if}}
+                {{#if usuario}}
+                    <div class="container text-light">
+                        <h3 class="subtitle lh-lg text-center">Consideraciones:</h3> 
+                        <p class="normal lh-lg text-center">1. Para que un proyecto sea viable para un promotor o inversionista, el % minimo  de negociación del margen es 10%.</p>
+                        <p class="normal lh-lg text-center">2. Los Valores de ingresos y egresos considerados en la evaluación son referenciales al estándar del mercado.</p>
+                        <p class="normal lh-lg text-center">3. Para mayor detalle del valor de su predio, contactenos para poder encontrarle el mejor inversor,  al Telefono 991154824</p>
+                    </div>
+                {{/if}}
+                {{#if imageMapa}}
+                    <div class="container pt-3">
+                        <h1 class="title text-light my-5">Plano de localización del predio</h1>
+                        <div class="text-center">
+                            <img src="{{imageMapa}}" alt="Mapa" class="img-fluid border border-dark border-4"/>
+                        </div>
+                    </div>
+                {{/if}}
+            {{/each}}
+        </section>
+    </div>
+</main>
+
+{{> footer}}

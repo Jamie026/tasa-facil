@@ -1,0 +1,157 @@
+@font-face { font-family: telsa; src: url("./../font/Gotham\ Book.otf"); }
+@font-face { font-family: telsaBold; src: url("./../font/Gotham\ Bold.otf"); } 
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    background: url("./../img/fondo-inmobiliario.png") center no-repeat;
+    background-size: cover;
+    font-family: telsa;
+    background-attachment: fixed;
+}
+
+.mt-6{
+    margin-top: 130px;
+}
+
+.navbar{
+    width: 100%;
+    z-index: 100;
+    position: fixed;
+    top: 0;
+}
+
+.nav-link{
+    color: white;
+    width: fit-content;
+    transition: all 300ms;
+    font-size: 16px;
+}
+
+.nav-link:hover{
+    color: white;
+    transform: scale(1.1);
+}
+
+.parallax-container{
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.parallax-multimedia{
+    width: 100%;
+    object-fit: fill;
+    height: 100%;
+}
+
+#detach-button-host{
+    display: none;
+}
+
+#mapa{
+    height: 100%;
+    width: 100%;
+    padding: 20px;
+}
+
+.item-center{
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 50;
+}
+
+.table-data{
+    width: 100%;
+    page-break-inside: avoid;
+}
+
+.table-data th{
+    height: 20px;
+    background-color: lightblue;
+    color: black;
+    padding: 5px;
+    border: 2px solid black;
+}
+
+.table-data td{
+    height: 50px;
+    padding: 15px;
+    border: 2px solid black;
+}
+
+.alert{
+    width: 100%;
+    position: fixed;
+    bottom: 0%;
+    text-align: center;
+    z-index: 100;
+}
+
+.form *{
+    font-size: 14px;
+}
+
+.title{
+    font-family: telsaBold;
+    font-size: 35px;
+    margin: auto 15px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.subtitle, .normal, .small{
+    text-align: center;
+}
+
+.subtitle{
+    font-size: 20px;
+}
+
+.normal{
+    font-size: 17px;
+}
+
+.small {
+    font-size: 14px;
+}
+
+.circle{
+    border-radius: 50%;
+    border: lightskyblue solid 5px;
+    width: fit-content;
+}
+
+@media (max-width: 992px) {
+    #mapa{
+        height: 425px;
+    }
+
+    .title{
+        font-size: 30px;
+    }
+    
+    .subtitle{
+        font-size: 18px;
+    }
+    
+    .normal{
+        font-size: 15px;
+    }
+    
+    .small {
+        font-size: 12px;
+    }
+}
