@@ -38,7 +38,7 @@ async function obtenerCoordenada(direccion) {
 
 function mostrarMapa(latitud, longitud, elementoMapa) {
     const coordenada = latitud + "," + longitud;
-    const url = "https://maps.googleapis.com/maps/api/staticmap?center=" + coordenada + "&markers=" + coordenada + "&size=400x400&key=AIzaSyDhE3-DQ-SZ8_V86SccBiU1if7ACzBt7So";    
+    const url = "https://maps.googleapis.com/maps/api/staticmap?center=" + coordenada + "&markers=" + coordenada + "&size=800x300&key=AIzaSyDhE3-DQ-SZ8_V86SccBiU1if7ACzBt7So";    
 
     let mapa = new google.maps.Map(elementoMapa, {
         center: { lat: latitud, lng: longitud },

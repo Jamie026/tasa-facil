@@ -73,25 +73,6 @@ body{
     z-index: 50;
 }
 
-.table-data{
-    width: 100%;
-    page-break-inside: avoid;
-}
-
-.table-data th{
-    height: 20px;
-    background-color: lightblue;
-    color: black;
-    padding: 5px;
-    border: 2px solid black;
-}
-
-.table-data td{
-    height: 50px;
-    padding: 15px;
-    border: 2px solid black;
-}
-
 .alert{
     width: 100%;
     position: fixed;
@@ -132,6 +113,10 @@ body{
     border-radius: 50%;
     border: lightskyblue solid 5px;
     width: fit-content;
+}
+
+.card-img-top{
+    height: 200px;
 }
 
 @media (max-width: 992px) {

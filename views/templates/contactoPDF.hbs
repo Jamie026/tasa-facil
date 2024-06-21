@@ -1,38 +1,41 @@
-<main style="padding: 20px; margin: 0;">
-    <section style="width: 100%;">
-        <img style="margin: 15px 0 25px 0;" src="https://app-redin-qrixjl7qeq-rj.a.run.app/img/banner-dark.png" height="30" width="180" alt="Logo"/>
-    </section>
-    <section style="width: 100%;">
-        <h1 style="text-align: center; font-size: 35px; margin-bottom: 25px;">Solicitud de contacto recibida</h1>
-    </section>
-    {{#each this}}
-        {{#if solicitud}}
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Solicitud de Contacto</title>
+    </head>
+    <body>
+        <main style="width: 100%; margin: auto;">
             <section style="width: 100%;">
-                <form style="margin-top: 25px; border: 2px solid #000; border-radius: 10px; padding: 20px;">
-                    {{#with this.solicitud}}
-                        <div style="margin-bottom: 20px;">
-                            <label style="margin-bottom: 5px; display: block;">Nombre o Razón Social</label>
-                            <input value="{{this.nombre}}" type="text" style="width: 100%; padding: 8px; border: 1px solid #000; border-radius: 5px;"/>
-                        </div>
-                        <div style="margin-bottom: 20px;">
-                            <label style="margin-bottom: 5px; display: block;">Teléfono</label>
-                            <input value="{{this.telefono}}" type="text" style="width: 100%; padding: 8px; border: 1px solid #000; border-radius: 5px;"/>
-                        </div>
-                        <div style="margin-bottom: 20px;">
-                            <label style="margin-bottom: 5px; display: block;">Correo Electrónico</label>
-                            <input value="{{this.email}}" type="email" style="width: 100%; padding: 8px; border: 1px solid #000; border-radius: 5px;"/>
-                        </div>
-                        <div style="margin-bottom: 20px;">
-                            <label style="margin-bottom: 5px; display: block;">Motivo de contacto</label>
-                            <input value="{{this.motivo}}" type="text" style="width: 100%; padding: 8px; border: 1px solid #000; border-radius: 5px;"/>
-                        </div>
-                        <div style="margin-bottom: 20px;">
-                            <label style="margin-bottom: 5px; display: block;">Descripción detallada de la solicitud</label>
-                            <textarea style="width: 100%; padding: 8px; border: 1px solid #000; border-radius: 5px;">{{this.solicitud}}</textarea>
-                        </div>
-                    {{/with}}
-                </form>
+                <img style="margin: 15px 0 25px 0;" src="https://app-redin-qrixjl7qeq-rj.a.run.app/img/banner-dark.png" height="35" width="170" alt="Logo"/>
             </section>
-        {{/if}}
-    {{/each}}
-</main>
+            <section style="width: 100%;">
+                <h1 style="text-align: center; font-size: 35px; margin-bottom: 25px;">Solicitud de contacto recibida</h1>
+            </section>
+            <form style="margin-top: 25px; border: 2px solid #000; border-radius: 10px; padding: 20px; background-color: #f8f9fa;">
+                {{#with solicitud}}
+                    <div style="margin-bottom: 20px;">
+                        <label style="margin-bottom: 5px; display: block; font-size: 18px;">Nombre o Razón Social</label>
+                        <input value="{{this.nombre}}" type="text" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px;"/>
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <label style="margin-bottom: 5px; display: block; font-size: 18px;">Teléfono</label>
+                        <input value="{{this.telefono}}" type="text" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px;"/>
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <label style="margin-bottom: 5px; display: block; font-size: 18px;">Correo Electrónico</label>
+                        <input value="{{this.email}}" type="email" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px;"/>
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <label style="margin-bottom: 5px; display: block; font-size: 18px;">Motivo de contacto</label>
+                        <input value="{{this.motivo}}" type="text" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px;"/>
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <label style="margin-bottom: 5px; display: block; font-size: 18px;" >Descripción detallada de la solicitud</label>
+                        <textarea style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px;">{{this.solicitud}}</textarea>
+                    </div>
+                {{/with}}
+            </form>
+        </main>
+    </body>
+</html>

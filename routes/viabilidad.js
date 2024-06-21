@@ -58,7 +58,6 @@ viabilidad.post("/", async (request, response) => {
                 evaluacion: formatearObjecto(evaluacionData.admin, ["resumen_de_evaluación"]),
                 imageMapa: dataBody.imageMapa,
                 graficaData: formatearObjecto(evaluacionData.admin, ["Ingresos_y_egresos"]),
-                admin: true
             }
         }
         const usuarioEnvio = {
@@ -66,16 +65,17 @@ viabilidad.post("/", async (request, response) => {
             data: {
                 evaluacion: formatearObjecto(evaluacionData.usuario, ["información_de_predio", "análisis_arquitectónico", "análisis_financiero", "análisis_valor_terreno"]),
                 imageMapa: dataBody.imageMapa,
-                usuario: true
             }
         }
+
         const correosEnviados = await Promise.all([
             prepararEnvio(usuarioEnvio.data, "viabilidad", usuarioEnvio.correo),
             prepararEnvio(adminEnvio.data, "viabilidad", adminEnvio.correo)
         ]);
+
         if (!correosEnviados[0] || !correosEnviados[1])
             throw new Error("Error durante la creación del PDF para el envio");
-        response.render("viabilidad", { success: ["La evaluación ha sido enviada a su correo."], data: usuarioEnvio.data, adminTelefono: adminTelefono});
+        response.render("viabilidad", { success: ["La evaluación ha sido enviada a su correo."], evaluacion: usuarioEnvio.data.evaluacion, imageMapa: usuarioEnvio.data.imageMapa});
     } catch (error) {
         console.log(error);
         response.redirect("/?errors=Ha+ocurrido+un+error+al+evaluar.+Intente+de+nuevo.");

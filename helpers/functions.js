@@ -11,12 +11,17 @@ async function crearPDF(nameTemplate, dataPDF) {
         const hbsFilePath = path.join(__dirname, "..", "views", "templates", nameTemplate);
         const templateSource = await fs.readFile(hbsFilePath, "utf-8");
         const template = handlebars.compile(templateSource, { noEscape: true });
-        const dataHTML = template({ data: dataPDF });
+        const dataHTML = template(dataPDF);
         const uniqueFilename = uuid() + ".pdf";
         const filePath = path.join(__dirname, uniqueFilename);
         const options = {
-            "format": "A3",
-            "border": "20px",
+            "format": "A1",
+            "border": {
+                "top": "30px",           
+                "right": "100px",
+                "bottom": "10px",
+                "left": "130px"
+            },
             "childProcessOptions": { env: { OPENSSL_CONF: '/dev/null' }}
         }
         await new Promise((resolve, reject) => {
