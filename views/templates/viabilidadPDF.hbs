@@ -54,8 +54,8 @@
                                                 <div style="width: 100%; margin-bottom: 20px;">
                                                     <div style="font-weight: bold; margin-bottom: 10px; font-size: 16px;">{{this.clave}}</div>
                                                     <div style="background-color: #d1ecf1; height: 35px; border-radius: 10px; overflow: hidden; position: relative;">
-                                                        <div style="width: {{this.valor}}%; height: 100%; background-color: #007bff; border-radius: 10px;"></div>
-                                                        <div style="position: absolute; top: 15%; left: 50%; transform: translateX(-50%); font-size: 13px; font-weight: bold; color: #fff;">{{this.valor}}%</div>
+                                                        <div style="width: {{this.valor}}%; height: 100%; {{#if (equal this.clave "Utilidad")}}background-color: green;{{else}}background-color: red;{{/if}} border-radius: 10px;"></div>
+                                                        <div style="position: absolute; top: 15%; left: 50%; transform: translateX(-50%); font-size: 13px; font-weight: bold; color: black;">{{divide this.valor 100}}</div>
                                                     </div>
                                                 </div>
                                             {{/each}}

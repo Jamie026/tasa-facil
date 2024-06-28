@@ -51,11 +51,10 @@ viabilidad.post("/", async (request, response) => {
             tipo_cambio: tasaCambio.compra, telefono: dataBody.telefono
         });
         const evaluacionData = evaluacionResponse.data;
-        const adminTelefono = adminData.Codigo_de_telefono + adminData.Telefono;
         const adminEnvio = { 
             correo: adminData.Correo,
             data: {
-                evaluacion: formatearObjecto(evaluacionData.admin, ["resumen_de_evaluación"]),
+                evaluacion: formatearObjecto(evaluacionData.admin, ["Resumen_de_evaluación", "Obra_(Construcción)", "Evaluación"]),
                 imageMapa: dataBody.imageMapa,
                 graficaData: formatearObjecto(evaluacionData.admin, ["Ingresos_y_egresos"]),
             }

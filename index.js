@@ -2,21 +2,31 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const path = require("path");
-const handlebars = require("express-handlebars");
+const { create } = require("express-handlebars");
 const bodyParser = require("body-parser");
 
 const port = process.env.PORT || 3000;
 
 app.set("view engine", "hbs");
 
-app.engine("hbs", handlebars.engine({
+const hbs = create({
     defaultLayout: "index",
-    layoutsDir: path.join(__dirname, "views/layouts"), 
+    layoutsDir: path.join(__dirname, "views/layouts"),
     extname: "hbs",
-    partialsDir: path.join(__dirname, "views/partials")
-}));
+    partialsDir: path.join(__dirname, "views/partials"),
+});
 
-app.set("views", [ path.join(__dirname, "views"), path.join(__dirname, "views/templates")]);
+hbs.handlebars.registerHelper("divide", function(value1, value2) {
+    return value1 / value2;
+})
+
+hbs.handlebars.registerHelper("equal", function(value1, value2) {
+    return value1 == value2;
+});
+
+app.engine("hbs", hbs.engine);
+
+app.set("views", [path.join(__dirname, "views"), path.join(__dirname, "views/templates")]);
 
 app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
