@@ -1,0 +1,18 @@
+{{> error}}
+{{> success}}
+{{> navbar}}
+
+<main class="container mb-5 mt-6 px-4">
+    <div class="row justify-content-center align-content-center">
+        <div class="col-12">
+            <p class="title text-light animate__animated animate__backInDown my-5">Mapa Comercial</p>
+        </div>
+        {{#each distritos}}
+            <div class="col-md-12 col-lg-6">
+                <img src="{{this}}" class="img-fluid my-3 mx-2 border border-dark border-2 rounded-2" alt="Distrito">
+            </div>
+        {{/each}}
+    </div>
+</main>
+
+{{> footer}}

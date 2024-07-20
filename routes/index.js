@@ -3,6 +3,9 @@ const express = require("express");
 const router = express.Router();
 const axios = require("axios");
 require("dotenv").config();
+const fs = require('fs');
+const path = require('path');
+const { log } = require("console");
 
 router.get("/", async (request, response) => {
     try {
@@ -37,5 +40,29 @@ router.get("/informacion", async (request, response) => {
         response.render("informacion", { errors: ["Error al cargar los datos, recargue la página."] });
     }
 });
+
+router.get("/mapa-comercial", async (request, response) => {
+    try {
+        const distritosResponse = await axios.get(process.env.RUTA_DISTRITOS)
+        const distritosData = distritosResponse.data
+        if(distritosData.statusCode != 200)
+            throw new Error("Error con el servidor");
+        const distritosNombres = JSON.parse(distritosData.response).map(distrito => distrito);
+        const imagesPath = path.join(__dirname, "..", "public", "img", "distritos");
+        const urls = distritosNombres.map(distrito =>{
+            const image = path.join(imagesPath, distrito + ".jpeg");
+            if (fs.existsSync(image)) 
+                return "img/distritos/" + distrito + ".jpeg";
+        }).filter(Boolean).sort((a, b) => {
+            const nameA = a.split('/').pop().toLowerCase();
+            const nameB = b.split('/').pop().toLowerCase();
+            return nameA.localeCompare(nameB);
+        });
+        response.render("mapa-comercial", { distritos: urls });
+    } catch (error) {
+        console.error(error);
+        response.render("mapa-comercial", { errors: ["Error al cargar los datos, recargue la página."] });
+    }
+})
 
 module.exports = router;
